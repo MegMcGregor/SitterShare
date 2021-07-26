@@ -1,0 +1,7 @@
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.csproj.AssemblyReference.cache
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.AssemblyInfoInputs.cache
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.AssemblyInfo.cs
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.csproj.CoreCompileInputs.cache
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\megmc\workspace\SitterShare\SitterShare\obj\Debug\net5.0\SitterShare.MvcApplicationPartsAssemblyInfo.cache
