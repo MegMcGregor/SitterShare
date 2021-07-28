@@ -21,6 +21,5 @@ namespace SitterShare.Models
         public bool hasDriversLisence { get; set; }
         public bool hasTransportation { get; set; }
         public bool hasInfantExperience { get; set; }
-
     }
 }
