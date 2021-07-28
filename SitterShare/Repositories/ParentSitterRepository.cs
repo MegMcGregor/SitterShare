@@ -8,20 +8,18 @@ using System.Threading.Tasks;
 
 namespace SitterShare.Repositories
 {
-    public class ParentSitterRepository
+    public class ParentSitterRepository : BaseRepository, IParentSitterRepository
     {
-        public class BabysitterRepository : BaseRepository
-        {
-            public BabysitterRepository(IConfiguration configuration) : base(configuration) { }
+        public ParentSitterRepository(IConfiguration configuration) : base(configuration) { }
 
-            public List<ParentSitter> GetMyBabysitterList(string parentFirebaseUid)
+        public List<ParentSitter> GetMyBabysitterList(string parentFirebaseUid)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"
+                    cmd.CommandText = @"
                 SELECT
                 ps.Id AS ConnectionId,
                 ps.BabysitterId,
@@ -48,49 +46,49 @@ namespace SitterShare.Repositories
                 WHERE ps.isConnectionAuthorized= 1 AND p.ParentFirebaseUid = parentFirebaseUid
                  ";
 
-                        DbUtils.AddParameter(cmd, "@FirebaseUserId", parentFirebaseUid);
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", parentFirebaseUid);
 
 
-                        var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                        var myBabysitters = new List<ParentSitter>();
-                        while (reader.Read())
+                    var myBabysitters = new List<ParentSitter>();
+                    while (reader.Read())
+                    {
+                        myBabysitters.Add(new ParentSitter()
                         {
-                            myBabysitters.Add(new ParentSitter()
+                            Id = DbUtils.GetInt(reader, "ConnectionId"),
+                            SitterId = DbUtils.GetInt(reader, "BabysitterId"),
+                            ParentId = DbUtils.GetInt(reader, "ParentId"),
+                            Babysitter = new Babysitter()
                             {
-                                Id = DbUtils.GetInt(reader, "ConnectionId"),
-                                SitterId = DbUtils.GetInt(reader, "BabysitterId"),
-                                ParentId = DbUtils.GetInt(reader, "ParentId"),
-                                Babysitter = new Babysitter()
-                                {
-                                    Id = DbUtils.GetInt(reader, "SitterId"),
-                                    FirstName = DbUtils.GetString(reader, "firstName"),
-                                    LastName = DbUtils.GetString(reader, "lastName"),
-                                    isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
-                                    Zipcode = DbUtils.GetInt(reader, "zipcode"),
-                                    Phone = DbUtils.GetString(reader, "phone"),
-                                    Email = DbUtils.GetString(reader, "email"),
-                                    Bio = DbUtils.GetString(reader, "bio"),
-                                    isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
-                                    hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
-                                    hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
-                                    hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
-                                },
-                                Parent = new Parent()
-                                {
-                                    Id = DbUtils.GetInt(reader, "CurrentParentId"),
-                                    ParentFirebaseUid = DbUtils.GetString(reader, "ParentFirebaseUid")
-                                }
-                            });
+                                Id = DbUtils.GetInt(reader, "SitterId"),
+                                FirstName = DbUtils.GetString(reader, "firstName"),
+                                LastName = DbUtils.GetString(reader, "lastName"),
+                                isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
+                                Zipcode = DbUtils.GetInt(reader, "zipcode"),
+                                Phone = DbUtils.GetString(reader, "phone"),
+                                Email = DbUtils.GetString(reader, "email"),
+                                Bio = DbUtils.GetString(reader, "bio"),
+                                isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
+                                hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
+                                hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
+                                hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
+                            },
+                            Parent = new Parent()
+                            {
+                                Id = DbUtils.GetInt(reader, "CurrentParentId"),
+                                ParentFirebaseUid = DbUtils.GetString(reader, "ParentFirebaseUid")
+                            }
+                        });
 
-                        }
-                        reader.Close();
-
-                        return myBabysitters;
                     }
+                    reader.Close();
 
+                    return myBabysitters;
                 }
+
             }
         }
     }
+}
 }

@@ -1,58 +1,71 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using SitterShare.Models;
+using SitterShare.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SitterShare.Repositories
 {
-    public class ParentRepository
+    public class ParentRepository : BaseRepository
     {
-        //public Models.Parent GetCurrentParentProfile (string firebaseUserId)
-        //{
-            //using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT up.Id, Up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
-        //                       up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
-        //                       ut.Name AS UserTypeName
-        //                  FROM UserProfile up
-        //                       LEFT JOIN UserType ut on up.UserTypeId = ut.Id
-        //                 WHERE FirebaseUserId = @FirebaseuserId";
+        public ParentRepository(IConfiguration configuration) : base(configuration) { }
 
-                //            DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
-                //            UserProfile userProfile = null;
+        public Parent GetParentByFireBaseId(string parentFirebaseUid)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT 
+                    p.Id,
+                    p.ParentFirebaseUid,
+                    p.UserTypeId,
+                    p.FirstName, 
+                    p.LastName,
+                    p.Address,
+                    p.City,
+                    p.State,
+                    p.Zipcode,
+                    p.Phone,
+                    p.Email,
+                    p.NumberOfKids
+                    FROM Parent p
+                    WHERE userTypeId=1 AND ParentFirebaseUID=@parentfirebaseUID";
 
-                //            var reader = cmd.ExecuteReader();
-                //            if (reader.Read())
-                //            {
-                //                userProfile = new UserProfile()
-                //                {
-                //                    Id = DbUtils.GetInt(reader, "Id"),
-                //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                //                    FirstName = DbUtils.GetString(reader, "FirstName"),
-                //                    LastName = DbUtils.GetString(reader, "LastName"),
-                //                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                //                    Email = DbUtils.GetString(reader, "Email"),
-                //                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                //                    ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                //                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                //                    UserType = new UserType()
-                //                    {
-                //                        Id = DbUtils.GetInt(reader, "UserTypeId"),
-                //                        Name = DbUtils.GetString(reader, "UserTypeName"),
-                //                    }
-                //                };
-                //            }
-                //            reader.Close();
+                    Utils.DbUtils.AddParameter(cmd, "@parentfirebaseUID", parentFirebaseUid);
 
-                //            return userProfile;
-                //        }
-                //    }
-                //}
+                    Parent parentUserProfile = null;
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        parentUserProfile = new Parent()
+                        {
+                            Id = DbUtils.GetInt(reader, "id"),
+                            ParentFirebaseUid = DbUtils.GetString(reader, "parentfirebaseuid"),
+                            UserTypeId =DbUtils.GetInt(reader,"usertypeid"),
+                            FirstName = DbUtils.GetString(reader, "firstname"),
+                            LastName = DbUtils.GetString(reader, "lastname"),
+                            Address = DbUtils.GetString(reader, "address"),
+                            City = DbUtils.GetString(reader, "city"),
+                            Zipcode = DbUtils.GetInt(reader, "zipcode"),
+                            Email = DbUtils.GetString(reader, "email"),
+                            Phone = DbUtils.GetString(reader, "phone"),
+                            NumberOfKids = DbUtils.GetInt(reader, "numberofkids"),
+                        };
+                    }
+                    reader.Close();
+
+                    return parentUserProfile;
+                }
+            }
         }
+
+
     }
 }
