@@ -5,16 +5,17 @@ import { Link } from 'react-router-dom';
 
 const BabysitterCard = ({ babysitter }) => {
 
+    { console.log(babysitter.babysitter.firstName) }
     return (
         <Card >
             < CardBody >
                 <p>
-                    <strong>{babysitter.FirstName}{babysitter.LastName}</strong>
+                    <strong>{babysitter.babysitter.firstName}{babysitter.babysitter.lastName}</strong>
                 </p>
-                <p>{babysitter.email}</p>
-                <p>{babysitter.phone}</p>
+                <p>{babysitter.babysitter.email}</p>
+                <p>{babysitter.babysitter.phone}</p>
                 <button>
-                    <Link to={`/babysitter/details/${babysitter.id}`}>view details</Link>
+                    <Link to={`/babysitter/details/${babysitter.babysitter.id}`}>view details</Link>
                 </button>
             </CardBody >
         </Card >

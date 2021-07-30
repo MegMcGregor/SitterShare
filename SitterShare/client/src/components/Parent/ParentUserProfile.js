@@ -21,7 +21,14 @@ const MyParentUserProfile = () => {
 
     return (
         <>
-            <h2 className="text-center">{user.firstName + " " + user.lastName}</h2>
+            <div class="profile-container">
+                <h2 className="text-center">{user.firstName + " " + user.lastName}</h2>
+                <h3>contact</h3>
+                <p>{user.address} {user.city}, {user.State} {user.zipcode}</p>
+                <p>{user.numberOfKids} kids</p>
+                <p>{user.phone}</p>
+                <p>{user.email}</p>
+            </div>
         </>
     );
 };

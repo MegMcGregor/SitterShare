@@ -29,12 +29,6 @@ namespace SitterShare.Controllers
             return Ok(myBabysitters);
         }
 
-        //private string GetCurrentFirebaseUserProfileId()
-        //{
-        //    string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    return id;
-        //}
-
         private Parent getCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
