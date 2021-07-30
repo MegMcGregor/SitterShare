@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SitterShare.Models;
 using SitterShare.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SitterShare.Controllers
@@ -13,17 +14,31 @@ namespace SitterShare.Controllers
     public class ParentSitterController : ControllerBase
     {
         private readonly IParentSitterRepository _parentSitterRepository;
-        public ParentSitterController(IParentSitterRepository parentSitterRepository)
+        private readonly IParentRepository _parentRepository;
+        public ParentSitterController(IParentSitterRepository parentSitterRepository, IParentRepository parentRepository)
         {
             _parentSitterRepository = parentSitterRepository;
+            _parentRepository = parentRepository;
         }
 
-        ///Can I change this to take in the user Id?
         [HttpGet("GetMyBabysitterList")]
-        public IActionResult GetMyBabysitterList(string parentFirebaseUid)
+        public IActionResult GetMyBabysitterList()
         {
-            var myBabysitters = _parentSitterRepository.GetMyBabysitterList(parentFirebaseUid);
+            var currentParent = getCurrentUserProfile();
+            var myBabysitters = _parentSitterRepository.GetMyBabysitterList(currentParent.Id);
             return Ok(myBabysitters);
+        }
+
+        //private string GetCurrentFirebaseUserProfileId()
+        //{
+        //    string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    return id;
+        //}
+
+        private Parent getCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _parentRepository.GetParentByFireBaseId(firebaseUserId);
         }
     }
 }

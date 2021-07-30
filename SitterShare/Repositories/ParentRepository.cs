@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SitterShare.Repositories
 {
-    public class ParentRepository : BaseRepository
+    public class ParentRepository : BaseRepository, IParentRepository
     {
         public ParentRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -48,7 +48,7 @@ namespace SitterShare.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "id"),
                             ParentFirebaseUid = DbUtils.GetString(reader, "parentfirebaseuid"),
-                            UserTypeId =DbUtils.GetInt(reader,"usertypeid"),
+                            UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
                             FirstName = DbUtils.GetString(reader, "firstname"),
                             LastName = DbUtils.GetString(reader, "lastname"),
                             Address = DbUtils.GetString(reader, "address"),

@@ -23,6 +23,8 @@ namespace SitterShare
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IParentSitterRepository, ParentSitterRepository>();
+            services.AddTransient<IParentRepository, ParentRepository>();
+
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

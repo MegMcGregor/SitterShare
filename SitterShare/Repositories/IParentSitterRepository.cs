@@ -5,6 +5,6 @@ namespace SitterShare.Repositories
 {
     public interface IParentSitterRepository
     {
-        List<ParentSitter> GetMyBabysitterList(string parentFirebaseUid);
+        List<ParentSitter> GetMyBabysitterList(int id);
     }
 }

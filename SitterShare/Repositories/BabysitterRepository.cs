@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SitterShare.Repositories
 {
-    public class BabysitterRepository : BaseRepository
+    public class BabysitterRepository : BaseRepository, IBabysitterRepository
     {
         public BabysitterRepository(IConfiguration configuration) : base(configuration) { }
 
-        public Babysitter GetSitterByFireBaseId(string sitterFirebaseUid)
+        public Babysitter GetSitterByFirebaseId(string sitterFirebaseUid)
         {
             using (var conn = Connection)
             {

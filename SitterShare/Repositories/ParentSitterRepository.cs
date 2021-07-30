@@ -12,7 +12,7 @@ namespace SitterShare.Repositories
     {
         public ParentSitterRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<ParentSitter> GetMyBabysitterList(string parentFirebaseUid)
+        public List<ParentSitter> GetMyBabysitterList(int id)
         {
             using (var conn = Connection)
             {
@@ -43,10 +43,10 @@ namespace SitterShare.Repositories
                 FROM Babysitter b
                 LEFT JOIN ParentSitter ps ON ps.babysitterId = b.Id
                 LEFT JOIN Parent p on p.Id = ps.ParentId
-                WHERE ps.isConnectionAuthorized= 1 AND p.ParentFirebaseUid = parentFirebaseUid
+                WHERE ps.isConnectionAuthorized= 1 AND p.Id = @id
                  ";
 
-                    DbUtils.AddParameter(cmd, "@FirebaseUserId", parentFirebaseUid);
+                    DbUtils.AddParameter(cmd, "@id", id);
 
 
                     var reader = cmd.ExecuteReader();
@@ -91,4 +91,4 @@ namespace SitterShare.Repositories
         }
     }
 }
-}
+
