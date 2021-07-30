@@ -29,6 +29,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <MySitterList />
                 </Route>
 
+                <Route path="/myfriendlist">
+                    <MyFriendList />
+                </Route>
+
                 <Route path="/myParentProfile">
                     <ParentUserProfile />
                 </Route>

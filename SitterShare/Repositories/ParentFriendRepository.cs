@@ -1,4 +1,6 @@
-﻿using SitterShare.Models;
+﻿using Microsoft.Extensions.Configuration;
+using SitterShare.Models;
+using SitterShare.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,84 +8,74 @@ using System.Threading.Tasks;
 
 namespace SitterShare.Repositories
 {
-    public class ParentFriendRepository
+    public class ParentFriendRepository : BaseRepository, IParentFriendRepository
     {
-        //public List<ParentFriend> GetMyFriendList(int id)
-        //{
-            //using (var conn = Connection)
-            //{
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //        SELECT
-        //        ps.Id AS ConnectionId,
-        //        ps.BabysitterId,
-        //        ps.ParentId,
-        //        ps.isConnectionAuthorized,
-        //        b.Id AS SitterId,
-        //        b.FirstName,
-        //        b.LastName,
-        //        b.Minor,
-        //        b.ZipCode,
-        //        b.Phone,
-        //        b.email,
-        //        b.bio,
-        //        b.isCprCertified,
-        //        b.hasDriversLisence,
-        //        b.hasTransportation,
-        //        b.hasInfantExperience,
-        //        p.Id AS CurrentParentId,
-        //        p.ParentFirebaseUID
+        public ParentFriendRepository(IConfiguration configuration) : base(configuration) { }
 
-        //        FROM Babysitter b
-        //        LEFT JOIN ParentSitter ps ON ps.babysitterId = b.Id
-        //        LEFT JOIN Parent p on p.Id = ps.ParentId
-        //        WHERE ps.isConnectionAuthorized= 1 AND p.CurrentParentId = @id
-        //         ";
+        public List<ParentFriend> GetMyFriendList(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                Select
+                pf.Id,
+                pf.FriendAId,
+                pf.FriendBId,
+                pa.Id as parentAId,
+                pa.ParentFirebaseUid As ParentAFirebaseUid,
+                pa.FirstName as ParentAFirstName,
+                pa.LastName as ParentALastName,
+                pb.Id AS parentBId,
+                pb.ParentFirebaseUid As ParentBFirebaseUid,
+                pb.FirstName as ParentBFirstName,
+                pb.LastName as ParentBLastName
 
-        //            DbUtils.AddParameter(cmd, "@id", id);
+                From ParentFriend pf
+                Join Parent pa on pa.Id = pf.FriendAId
+                Join Parent pb on pb.Id = pf.FriendBId
+                Where pa.Id = @id OR pb.Id = @id;
+                 ";
 
+                    DbUtils.AddParameter(cmd, "@id", id);
 
-        //            var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-        //            var nyFriends = new List<ParentSitter>();
-        //            while (reader.Read())
-        //            {
-        //                myFriends.Add(new ParentSitter()
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "ConnectionId"),
-        //                    SitterId = DbUtils.GetInt(reader, "BabysitterId"),
-        //                    ParentId = DbUtils.GetInt(reader, "ParentId"),
-        //                    Babysitter = new Babysitter()
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "SitterId"),
-        //                        FirstName = DbUtils.GetString(reader, "firstName"),
-        //                        LastName = DbUtils.GetString(reader, "lastName"),
-        //                        isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
-        //                        Zipcode = DbUtils.GetInt(reader, "zipcode"),
-        //                        Phone = DbUtils.GetString(reader, "phone"),
-        //                        Email = DbUtils.GetString(reader, "email"),
-        //                        Bio = DbUtils.GetString(reader, "bio"),
-        //                        isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
-        //                        hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
-        //                        hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
-        //                        hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
-        //                    },
-        //                    Parent = new Parent()
-        //                    {
-        //                        Id = DbUtils.GetInt(reader, "CurrentParentId"),
-        //                        ParentFirebaseUid = DbUtils.GetString(reader, "ParentFirebaseUid")
-        //                    }
-        //                });
+                    var myFriends = new List<ParentFriend>();
+                    while (reader.Read())
+                    {
+                        myFriends.Add(new ParentFriend()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FriendAId = DbUtils.GetInt(reader, "FriendAId"),
+                            FriendBId = DbUtils.GetInt(reader, "FriendBId"),
+                            ParentA = new Parent()
+                            {
+                                Id = DbUtils.GetInt(reader, "ParentAId"),
+                                ParentFirebaseUid = DbUtils.GetString(reader, "ParentAFirebaseUid"),
+                                FirstName = DbUtils.GetString(reader, "ParentAFirstName"),
+                                LastName = DbUtils.GetString(reader, "ParentALastName"),
+                            },
+                            ParentB = new Parent()
+                            {
+                                Id = DbUtils.GetInt(reader, "ParentAId"),
+                                ParentFirebaseUid = DbUtils.GetString(reader, "ParentBFirebaseUid"),
+                                FirstName = DbUtils.GetString(reader, "ParentBFirstName"),
+                                LastName = DbUtils.GetString(reader, "ParentBLastName"),
+                            }
+                        });
+                    }
 
-        //            }
-        //            reader.Close();
+                        reader.Close();
 
-        //            return myFriends;
-        //        }
+                        return myFriends;
+                    }
+                }
+            }
 
-        //    }
-        //}
+        }
     }
-}
+
+

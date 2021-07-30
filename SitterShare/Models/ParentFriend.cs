@@ -10,6 +10,7 @@ namespace SitterShare.Models
         public int Id { get; set; }
         public int FriendAId { get; set; }
         public int FriendBId { get; set; }
-        public Parent Parent { get; set; }
+        public Parent ParentA { get; set; }
+        public Parent ParentB { get; set; }
     }
 }

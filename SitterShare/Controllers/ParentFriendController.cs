@@ -9,25 +9,26 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SitterShare.Controllers
-{   [Authorize]
+{
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentSitterController : ControllerBase
+    public class ParentFriendController : ControllerBase
     {
-        private readonly IParentSitterRepository _parentSitterRepository;
+        private readonly IParentFriendRepository _parentFriendRepository;
         private readonly IParentRepository _parentRepository;
-        public ParentSitterController(IParentSitterRepository parentSitterRepository, IParentRepository parentRepository)
+        public ParentFriendController(IParentFriendRepository parentFriendRepository, IParentRepository parentRepository)
         {
-            _parentSitterRepository = parentSitterRepository;
+            _parentFriendRepository = parentFriendRepository;
             _parentRepository = parentRepository;
         }
 
-        [HttpGet("GetMyBabysitterList")]
-        public IActionResult GetMyBabysitterList()
+        [HttpGet("GetMyFriendList")]
+        public IActionResult GetMyFriendList()
         {
             var currentParent = getCurrentUserProfile();
-            var myBabysitters = _parentSitterRepository.GetMyBabysitterList(currentParent.Id);
-            return Ok(myBabysitters);
+            var myFriends = _parentFriendRepository.GetMyFriendList(currentParent.Id);
+            return Ok(myFriends);
         }
 
         private Parent getCurrentUserProfile()
@@ -35,5 +36,7 @@ namespace SitterShare.Controllers
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _parentRepository.GetParentByFireBaseId(firebaseUserId);
         }
+
     }
 }
+

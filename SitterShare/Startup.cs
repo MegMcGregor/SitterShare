@@ -23,6 +23,7 @@ namespace SitterShare
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IParentSitterRepository, ParentSitterRepository>();
+            services.AddTransient<IParentFriendRepository, ParentFriendRepository>();
             services.AddTransient<IParentRepository, ParentRepository>();
 
 
