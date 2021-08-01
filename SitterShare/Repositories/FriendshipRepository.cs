@@ -19,7 +19,7 @@ namespace SitterShare.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"
+                cmd.CommandText = @"
                 Select
                 f.Id as FriendshipId,
                 f.UserId,
