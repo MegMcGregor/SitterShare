@@ -1,6 +1,6 @@
 import { getToken } from "./authManager";
 
-const baseUrl = '/api/parentFriend'
+const baseUrl = '/api/friendship'
 
 export const getCurrentUsersFriends = () => {
     return getToken().then((token) => {
@@ -14,7 +14,7 @@ export const getCurrentUsersFriends = () => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occurred while trying to get your Sitter List.");
+                throw new Error("An unknown error occurred while trying to get your Friend List.");
             }
         });
     });

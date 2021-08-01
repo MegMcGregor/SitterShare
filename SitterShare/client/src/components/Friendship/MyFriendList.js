@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getCurrentUsersFriends } from "../../modules/parentFriendManager";
+import { getCurrentUsersFriends } from "../../modules/friendshipManager";
 import FriendCard from "./FriendCard";
 
 const MyFriendList = () => {

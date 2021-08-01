@@ -6,5 +6,6 @@ namespace SitterShare.Repositories
     public interface IParentSitterRepository
     {
         List<ParentSitter> GetMyBabysitterList(int id);
+        List<ParentSitter> GetMyClients(int id);
     }
 }

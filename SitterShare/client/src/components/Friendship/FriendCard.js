@@ -10,9 +10,10 @@ const FriendCard = ({ friend }) => {
     return (
         <Card >
             < CardBody >
+                <p>{friend.friendA.Name}</p>
             </ CardBody >
         </Card >
     );
 }
 
-export default BabysitterCard
+export default FriendCard

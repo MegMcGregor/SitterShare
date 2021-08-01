@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import MySitterList from "./ParentSitter/MySitterList";
+import MyFriendList from "./Friendship/MyFriendList";
 import ParentUserProfile from "./Parent/ParentUserProfile";
 import Register from "./Register";
 

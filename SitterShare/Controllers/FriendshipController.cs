@@ -1,34 +1,36 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SitterShare.Models;
 using SitterShare.Repositories;
-using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace SitterShare.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentFriendController : ControllerBase
+    public class FriendshipController : ControllerBase
     {
-        private readonly IParentFriendRepository _parentFriendRepository;
+        private readonly IFriendshipRepository _friendshipRepository;
         private readonly IParentRepository _parentRepository;
-        public ParentFriendController(IParentFriendRepository parentFriendRepository, IParentRepository parentRepository)
+        public FriendshipController(IFriendshipRepository friendshipRepository, IParentRepository parentRepository)
         {
-            _parentFriendRepository = parentFriendRepository;
+            _friendshipRepository = friendshipRepository;
             _parentRepository = parentRepository;
         }
 
         [HttpGet("GetMyFriendList")]
         public IActionResult GetMyFriendList()
         {
-            var currentParent = getCurrentUserProfile();
-            var myFriends = _parentFriendRepository.GetMyFriendList(currentParent.Id);
+            var myFriends = _friendshipRepository.GetMyFriendList();
             return Ok(myFriends);
+        }
+
+        [HttpGet("GetSittersInMyNetwork")]
+        public IActionResult GetSittersInMyNetwork()
+        {
+            var sittersInMyNetwork = _friendshipRepository.GetSittersInMyNetwork();
+            return Ok(sittersInMyNetwork);
         }
 
         private Parent getCurrentUserProfile()

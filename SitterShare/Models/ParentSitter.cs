@@ -9,7 +9,7 @@ namespace SitterShare.Models
     {
         public int Id { get; set; }
         public int ParentId { get; set; }
-        public int SitterId { get; set; }
+        public int BabysitterId { get; set; }
         public Babysitter Babysitter { get; set; }
         public Parent Parent { get; set; }
     }
