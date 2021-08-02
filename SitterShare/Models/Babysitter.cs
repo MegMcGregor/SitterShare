@@ -16,11 +16,10 @@ namespace SitterShare.Models
         public int Zipcode { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Bio { get; set }
+        public string Bio { get; set; }
         public bool isCprCertified { get; set; }
         public bool hasDriversLisence { get; set; }
         public bool hasTransportation { get; set; }
         public bool hasInfantExperience { get; set; }
-
     }
 }
