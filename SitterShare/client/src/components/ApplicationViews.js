@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import MySitterList from "./ParentSitter/MySitterList";
+import NetworkSitterList from "./Friendship/NetworkSitterList";
 import MyFriendList from "./Friendship/MyFriendList";
 import ParentUserProfile from "./Parent/ParentUserProfile";
 import Register from "./Register";
@@ -26,7 +27,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Register />
                 </Route>
 
-                <Route path="/mysitterlist">
+                <Route path="/MySitterList">
                     <MySitterList />
                 </Route>
 
@@ -34,9 +35,17 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <MyFriendList />
                 </Route>
 
-                <Route path="/myParentProfile">
+                <Route path="/ParentProfile">
                     <ParentUserProfile />
                 </Route>
+
+                <Route path="/SittersInMyNetwork">
+                    <NetworkSitterList />
+                </Route>
+
+                {/* <Route path="/myclientlist">
+                    <myClientList />
+                </Route> */}
             </Switch>
         </main>
     );

@@ -12,14 +12,14 @@ namespace SitterShare.Repositories
     {
         public FriendshipRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Friendship> GetMyFriendList()
+        public List<Friendship> GetMyFriendList(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                cmd.CommandText = @"
+                    cmd.CommandText = @"
                 Select
                 f.Id as FriendshipId,
                 f.UserId,
@@ -36,7 +36,10 @@ namespace SitterShare.Repositories
                 From Friendship f
                 Join Parent pu on pu.Id = f.UserId
                 Join Parent pf on pf.Id = f.FriendId
+                WHERE pu.Id=f.Userid 
                  ";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
 
                     var reader = cmd.ExecuteReader();
 
@@ -81,37 +84,37 @@ namespace SitterShare.Repositories
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                        Select 
-                        f.Id,
-                        f.UserId,
-                        f.FriendId,
-                        pu.Id AS parentUserId,
-                        pf.Id AS FriendOfUserId,
-                        pf.ParentFirebaseUid As FriendFirebaseUid,
-                        pf.FirstName as FriendFirstName,
-                        pf.LastName as FriendLastName,
-                        sc.Id as SitterFriendConnectionId,
-                        sc.ParentId as FriendConnectionId,
-                        sc.BabysitterId as SitterInNetworkId,
-                        b.Id = BabysitterId
-                        b.FirstName as BabysitterFirstName,
-                        b.LastName as BabysitterLastName,
-                        b.Minor,
-                        b.Zipcode,
-                        b.Phone,
-                        b.Email,
-                        b.Bio,
-                        b.IsCprCertified,
-                        b.HasDriversLisence,
-                        b.HasTransportation,
-                        b.HasInfantExperience
+                                Select 
+                                f.Id as FriendshipId,
+                                f.UserId,
+                                f.FriendId,
+                                pu.Id as CurrentUserId,
+                                pu.ParentFirebaseUid As UserFirebaseUid,
+                                pf.Id as FriendOfUserId,                           
+                                pf.FirstName as FriendFirstName,
+                                pf.LastName as FriendLastName,
+                                sc.Id as NetworkConnectionId,
+                                sc.ParentId as FriendConnectionId,
+                                sc.BabysitterId as SitterConnectionId,
+                                b.Id as BabysitterId,
+                                b.FirstName as BabysitterFirstName,
+                                b.LastName as BabysitterLastName,
+                                b.Minor,
+                                b.Zipcode,
+                                b.Phone,
+                                b.Email,
+                                b.Bio,
+                                b.IsCprCertified,
+                                b.HasDriversLisence,
+                                b.HasTransportation,
+                                b.HasInfantExperience
 
-                        From Friendship f
-                        Join Parent pu on pu.Id=f.UserId
-                        Join Parent pf on f.FriendId = pf.Id
-                        Join ParentSitter sc on sc.ParentId = pf.Id
-                        Join Babysitter b on sc.BabysitterId = b.Id
-                 ";
+                                From Friendship f
+                                Join Parent pu on pu.Id=f.UserId
+                                Join Parent pf on f.FriendId=pf.Id
+                                Join ParentSitter sc on sc.ParentId=pf.Id
+                                Join Babysitter b on sc.BabysitterId=b.Id
+                         ";
 
                         var reader = cmd.ExecuteReader();
 
@@ -120,21 +123,25 @@ namespace SitterShare.Repositories
                         {
                             sittersInMyNetwork.Add(new Friendship()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
+                                Id = DbUtils.GetInt(reader, "FriendshipId"),
                                 UserId = DbUtils.GetInt(reader, "UserId"),
                                 FriendId = DbUtils.GetInt(reader, "FriendId"),
+                                User = new Parent()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CurrentUserId"),
+                                    ParentFirebaseUid = DbUtils.GetString(reader, "UserFirebaseUid"),
+                                },
                                 Friend = new Parent()
                                 {
                                     Id = DbUtils.GetInt(reader, "FriendOfUserId"),
-                                    ParentFirebaseUid = DbUtils.GetString(reader, "FriendFirebaseUid"),
                                     FirstName = DbUtils.GetString(reader, "FriendFirstName"),
                                     LastName = DbUtils.GetString(reader, "FriendLastName"),
                                 },
                                 SitterConnection = new ParentSitter()
                                 {
-                                    Id = DbUtils.GetInt(reader, "SitterFriendConnectionId"),
+                                    Id = DbUtils.GetInt(reader, "NetworkConnectionId"),
                                     ParentId = DbUtils.GetInt(reader, "FriendConnectionId"),
-                                    BabysitterId = DbUtils.GetInt(reader, "SitterInNetworkId"),
+                                    BabysitterId = DbUtils.GetInt(reader, "SitterConnectionId"),
                                     Babysitter = new Babysitter
                                     {
                                         Id = DbUtils.GetInt(reader, "BabysitterId"),

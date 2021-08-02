@@ -28,6 +28,24 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Find Friends</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Find Sitters</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/myfriendlist">My Friends</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/mysitterlist">My Babysitters</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/sittersinmynetwork">Sitters in My Network</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/ParentProfile">My Account</NavLink>
+                                </NavItem>
+                                <NavItem>
                                     <a aria-current="page" className="nav-link"
                                         style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                                 </NavItem>

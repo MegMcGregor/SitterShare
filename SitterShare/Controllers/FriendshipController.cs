@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SitterShare.Models;
 using SitterShare.Repositories;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace SitterShare.Controllers
@@ -22,8 +23,8 @@ namespace SitterShare.Controllers
         [HttpGet("GetMyFriendList")]
         public IActionResult GetMyFriendList()
         {
-            var myFriends = _friendshipRepository.GetMyFriendList();
-            return Ok(myFriends);
+            var currentUser = getCurrentUserProfile();
+            return Ok(_friendshipRepository.GetMyFriendList(currentUser.Id));
         }
 
         [HttpGet("GetSittersInMyNetwork")]

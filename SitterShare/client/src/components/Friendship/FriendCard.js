@@ -10,7 +10,8 @@ const FriendCard = ({ friend }) => {
     return (
         <Card >
             < CardBody >
-                <p>{friend.friendA.Name}</p>
+                <p>{friend.friend.firstName} {friend.friend.lastName}</p>
+                <button>Remove</button>
             </ CardBody >
         </Card >
     );

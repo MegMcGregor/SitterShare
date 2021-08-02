@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getCurrentUser } from "../../modules/parentManager";
 
-const MyParentUserProfile = () => {
+const ParentUserProfile = () => {
     const [user, setUser] = useState([]);
 
     const GetMyParentUserProfile = () => {
@@ -21,7 +21,7 @@ const MyParentUserProfile = () => {
 
     return (
         <>
-            <div class="profile-container">
+            <div className="profile-container">
                 <h2 className="text-center">{user.firstName + " " + user.lastName}</h2>
                 <h3>contact</h3>
                 <p>{user.address} {user.city}, {user.State} {user.zipcode}</p>
@@ -33,4 +33,5 @@ const MyParentUserProfile = () => {
     );
 };
 
-export default MyParentUserProfile;
+export default ParentUserProfile;
+

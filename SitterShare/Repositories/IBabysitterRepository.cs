@@ -1,9 +1,9 @@
-﻿using SitterShare.Models;
+﻿//using SitterShare.Models;
 
-namespace SitterShare.Repositories
-{
-    public interface IBabysitterRepository
-    {
-        Babysitter GetSitterByFirebaseId(string sitterFirebaseUid);
-    }
-}
+//namespace SitterShare.Repositories
+//{
+//    public interface IBabysitterRepository
+//    {
+//        Babysitter GetSitterByFirebaseId(string sitterFirebaseUid);
+//    }
+//}

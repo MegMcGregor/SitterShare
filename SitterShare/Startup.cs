@@ -24,6 +24,7 @@ namespace SitterShare
         {
             services.AddTransient<IParentSitterRepository, ParentSitterRepository>();
             services.AddTransient<IFriendshipRepository, FriendshipRepository>();
+            //services.AddTransient<IBabysitterRepository, BabysitterRepository>();
             services.AddTransient<IParentRepository, ParentRepository>();
 
 

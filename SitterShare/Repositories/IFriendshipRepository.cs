@@ -5,8 +5,7 @@ namespace SitterShare.Repositories
 {
     public interface IFriendshipRepository
     {
-        List<Friendship> GetMyFriendList();
+        List<Friendship> GetMyFriendList(int id);
         List<Friendship> GetSittersInMyNetwork();
-
     }
 }

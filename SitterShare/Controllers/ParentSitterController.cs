@@ -9,7 +9,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SitterShare.Controllers
-{  
+{
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ParentSitterController : ControllerBase
@@ -30,13 +31,13 @@ namespace SitterShare.Controllers
             return Ok(myBabysitters);
         }
 
-        [HttpGet("getMyClients")]
-        public IActionResult GetMyClients()
-        {
-            var currentUser = getCurrentUserProfile();
-            var myClients = _parentSitterRepository.GetMyBabysitterList(currentUser.Id);
-            return Ok(myClients);
-        }
+        //[HttpGet("getMyClients")]
+        //public IActionResult GetMyClients()
+        //{
+        //    var currentUser = getCurrentUserProfile();
+        //    var myClients = _parentSitterRepository.GetMyBabysitterList(currentUser.Id);
+        //    return Ok(myClients);
+        //}
 
         private Parent getCurrentUserProfile()
         {
