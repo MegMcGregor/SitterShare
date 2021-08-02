@@ -5,7 +5,7 @@ import MySitterList from "./ParentSitter/MySitterList";
 import NetworkSitterList from "./Friendship/NetworkSitterList";
 import MyFriendList from "./Friendship/MyFriendList";
 import ParentUserProfile from "./Parent/ParentUserProfile";
-import Register from "./Register";
+import Register from "./RegisterParent";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -28,19 +28,19 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
 
                 <Route path="/MySitterList">
-                    <MySitterList />
+                    {isLoggedIn ? <MySitterList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/myfriendlist">
-                    <MyFriendList />
+                    {isLoggedIn ? <MyFriendList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/ParentProfile">
-                    <ParentUserProfile />
+                    {isLoggedIn ? <ParentUserProfile /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/SittersInMyNetwork">
-                    <NetworkSitterList />
+                    {isLoggedIn ? <NetworkSitterList /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* <Route path="/myclientlist">

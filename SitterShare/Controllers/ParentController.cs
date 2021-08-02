@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Tabloid.Models;
 
 namespace SitterShare.Controllers
 {
@@ -43,6 +44,17 @@ namespace SitterShare.Controllers
                 return NotFound();
             }
             return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(Parent parentUserProfile)
+        {
+            parentUserProfile.UserTypeId = UserType.Parent_ID;
+            _parentRepository.Add(parentUserProfile);
+            return CreatedAtAction(
+                nameof(GetParentByFireBaseId),
+                new { parentFirebaseUid = parentUserProfile.ParentFirebaseUid },
+                parentUserProfile);
         }
 
         private string GetCurrentFirebaseUserProfileId()

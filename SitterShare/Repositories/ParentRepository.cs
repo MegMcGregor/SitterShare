@@ -12,7 +12,6 @@ namespace SitterShare.Repositories
     {
         public ParentRepository(IConfiguration configuration) : base(configuration) { }
 
-
         public Parent GetParentByFireBaseId(string parentFirebaseUid)
         {
             using (var conn = Connection)
@@ -62,6 +61,35 @@ namespace SitterShare.Repositories
                     reader.Close();
 
                     return parentUserProfile;
+                }
+            }
+        }
+
+
+        public void Add(Parent parentUserProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Parent 
+                                    (ParentFirebaseUid, UserTypeId, FirstName, LastName, Address, 
+                                    City, State, ZipCode, Email)
+                                    OUTPUT INSERTED.ID
+                                    VALUES (@ParentFirebaseUid, @userTypeId, @FirstName, @LastName, @Address,
+                                           @City, @State, @Zipcode, @Phone, @email, @NumberofKids)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", parentUserProfile.ParentFirebaseUid);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", parentUserProfile.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@FirstName", parentUserProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", parentUserProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@DisplayName", parentUserProfile.Address);
+                    DbUtils.AddParameter(cmd, "@Email", parentUserProfile.City);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", parentUserProfile.State);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", parentUserProfile.Zipcode);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", parentUserProfile.Email);
+
+                    parentUserProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }
