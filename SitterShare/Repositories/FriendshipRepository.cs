@@ -20,23 +20,19 @@ namespace SitterShare.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                Select
-                f.Id as FriendshipId,
-                f.UserId,
-                f.FriendId,
-                pu.Id as parentUserId,
-                pu.ParentFirebaseUid As UserFirebaseUid,
-                pu.FirstName as UserFirstName,
-                pu.LastName as UserLastName,
-                pf.Id AS FriendId,
-                pf.ParentFirebaseUid As FriendFirebaseUid,
-                pf.FirstName as FriendFirstName,
-                pf.LastName as FriendLastName
-
-                From Friendship f
-                Join Parent pu on pu.Id = f.UserId
-                Join Parent pf on pf.Id = f.FriendId
-                WHERE pu.Id=f.Userid 
+                 Select distinct u.firstName, u.lastName, u.id, f.userId, f.friendId
+                    FROM friendship f
+                    JOIN parent u ON f.userId = u.id OR f.friendId = u.id
+                    WHERE (u.id IN (
+                    SELECT f.friendId
+                    FROM friendship f
+                    WHERE f.userId = @id) 
+                    OR u.id IN (
+                    SELECT f.userId
+                    FROM friendship f
+                    WHERE f.friendId = @id
+                        ))
+                    AND (f.friendId =@id OR f.userId = @id)
                  ";
 
                     DbUtils.AddParameter(cmd, "@id", id);
@@ -48,22 +44,14 @@ namespace SitterShare.Repositories
                     {
                         myFriends.Add(new Friendship()
                         {
-                            Id = DbUtils.GetInt(reader, "FriendshipId"),
+                            Id = DbUtils.GetInt(reader, "Id"),
                             UserId = DbUtils.GetInt(reader, "UserId"),
                             FriendId = DbUtils.GetInt(reader, "FriendId"),
-                            User = new Parent()
-                            {
-                                Id = DbUtils.GetInt(reader, "parentUserId"),
-                                ParentFirebaseUid = DbUtils.GetString(reader, "UserFirebaseUid"),
-                                FirstName = DbUtils.GetString(reader, "UserFirstName"),
-                                LastName = DbUtils.GetString(reader, "UserLastName"),
-                            },
                             Friend = new Parent()
                             {
                                 Id = DbUtils.GetInt(reader, "FriendId"),
-                                ParentFirebaseUid = DbUtils.GetString(reader, "FriendFirebaseUid"),
-                                FirstName = DbUtils.GetString(reader, "FriendFirstName"),
-                                LastName = DbUtils.GetString(reader, "FriendLastName"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
                             }
                         });
                     }
