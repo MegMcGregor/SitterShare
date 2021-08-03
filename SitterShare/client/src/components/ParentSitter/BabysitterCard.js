@@ -15,7 +15,7 @@ const BabysitterCard = ({ babysitter }) => {
                 <p>{babysitter.babysitter.email}</p>
                 <p>{babysitter.babysitter.phone}</p>
                 <button>
-                    <Link to={`/babysitter/details/${babysitter.babysitter.id}`}>view details</Link>
+                    <Link to={`/MySitterList/details/${babysitter.babysitter.id}`}>view details</Link>
                 </button>
             </CardBody >
         </Card >

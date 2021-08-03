@@ -1,11 +1,12 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-const _apiUrl = "/api/parent";
+const _apiUrlA = "/api/parent";
+const _apiUrlB = "/api/babysitter"
 
-const _doesUserExist = (firebaseUserId) => {
+const _doesParentUserExist = (firebaseUserId) => {
     return getToken().then((token) =>
-        fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
+        fetch(`${_apiUrlA}/DoesUserExist/${firebaseUserId}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -13,9 +14,20 @@ const _doesUserExist = (firebaseUserId) => {
         }).then(resp => resp.ok));
 };
 
-const _saveUser = (userProfile) => {
+const _doesBabysitterUserExist = (firebaseUserId) => {
     return getToken().then((token) =>
-        fetch(_apiUrl, {
+        fetch(`${_apiUrlB}/DoesUserExist/${firebaseUserId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(resp => resp.ok));
+};
+
+
+const _saveParentUser = (userProfile) => {
+    return getToken().then((token) =>
+        fetch(_apiUrlA, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -25,18 +37,40 @@ const _saveUser = (userProfile) => {
         }).then(resp => resp.json()));
 };
 
-
-export const getToken = () => {
-    const currentUser = firebase.auth().currentUser;
-    if (!currentUser) {
-        throw new Error("Cannot get current user. Did you forget to login?");
-    }
-    return currentUser.getIdToken();
+const _saveBabysitterUser = (userProfile) => {
+    return getToken().then((token) =>
+        fetch(_apiUrlB, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userProfile)
+        }));
 };
 
-export const login = (email, pw) => {
+export const loginParent = (email, pw) => {
     return firebase.auth().signInWithEmailAndPassword(email, pw)
-        .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
+        .then((signInResponse) => _doesParentUserExist(signInResponse.user.uid))
+        .then((doesUserExist) => {
+            if (!doesUserExist) {
+
+                // If we couldn't find the user in our app's database, we should logout of firebase
+                logout();
+
+                throw new Error("Something's wrong. The user exists in firebase, but not in the application database.");
+            } else {
+                _onLoginStatusChangedHandler(true);
+            }
+        }).catch(err => {
+            console.error(err);
+            throw err;
+        });
+};
+
+export const loginBabysitter = (email, pw) => {
+    return firebase.auth().signInWithEmailAndPassword(email, pw)
+        .then((signInResponse) => _doesBabysitterUserExist(signInResponse.user.uid))
         .then((doesUserExist) => {
             if (!doesUserExist) {
 
@@ -54,17 +88,39 @@ export const login = (email, pw) => {
 };
 
 
-export const logout = () => {
-    firebase.auth().signOut()
+////////////REGISTER//////////////
+
+export const registerParent = (userProfile, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+        .then((createResponse) => _saveParentUser({
+            ...userProfile,
+            parentFirebaseUId: createResponse.user.uid
+        }).then(() => {
+            _onLoginStatusChangedHandler(true)
+        }));
+};
+
+export const registerBabysitter = (userProfile, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+        .then((createResponse) => _saveBabysitterUser({
+            ...userProfile,
+            sitterFirebaseUId: createResponse.user.uid
+        }).then(() => _onLoginStatusChangedHandler(true)));
 };
 
 
-export const register = (userProfile, password) => {
-    return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-        .then((createResponse) => _saveUser({
-            ...userProfile,
-            firebaseUserId: createResponse.user.uid
-        }).then(() => _onLoginStatusChangedHandler(true)));
+
+export const getToken = () => {
+    const currentUser = firebase.auth().currentUser;
+    if (!currentUser) {
+        throw new Error("Cannot get current user. Did you forget to login?");
+    }
+    return currentUser.getIdToken();
+};
+
+
+export const logout = () => {
+    firebase.auth().signOut()
 };
 
 

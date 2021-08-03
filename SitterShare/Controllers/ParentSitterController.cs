@@ -31,12 +31,50 @@ namespace SitterShare.Controllers
             return Ok(myBabysitters);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var babysitter = _parentSitterRepository.GetMyBabysitterById(id);
+            if (babysitter == null)
+            {
+                return NotFound();
+            }
+            return Ok(babysitter);
+        }
+
         //[HttpGet("getMyClients")]
         //public IActionResult GetMyClients()
         //{
         //    var currentUser = getCurrentUserProfile();
         //    var myClients = _parentSitterRepository.GetMyBabysitterList(currentUser.Id);
         //    return Ok(myClients);
+        //}
+
+        //public void AddtoMySitterListt(ParentSitter connection)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //                    INSERT INTO POST (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId, isDeleted)
+        //                    OUTPUT INSERTED.ID
+        //                    VALUES(
+        //                        @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime, 1, @CategoryId, @UserProfileId, 0 )";
+
+        //            DbUtils.AddParameter(cmd, @"Title", post.Title);
+        //            DbUtils.AddParameter(cmd, "@Content", post.Content);
+        //            DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
+        //            DbUtils.AddParameter(cmd, "@CreateDateTime", post.CreateDateTime);
+        //            DbUtils.AddParameter(cmd, "@PublishDateTime", post.PublishDateTime);
+        //            DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
+        //            DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+
+        //            post.Id = (int)cmd.ExecuteScalar();
+
+        //        }
+        //    }
         //}
 
         private Parent getCurrentUserProfile()

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { userTypeContext } from "../modules/UserTypeProvider";
 import { NavLink as RRNavLink } from "react-router-dom";
 import {
     Collapse,
@@ -13,7 +14,9 @@ import { logout } from "../modules/authManager";
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [isParent, setIsParent] = useState();
     const toggle = () => setIsOpen(!isOpen);
+    const { userType } = useContext(userTypeContext)
 
     return (
         <div>
@@ -22,7 +25,7 @@ export default function Header({ isLoggedIn }) {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                        {isLoggedIn &&
+                        {userType && isLoggedIn ?
                             <>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/">Home</NavLink>
@@ -49,21 +52,47 @@ export default function Header({ isLoggedIn }) {
                                     <a aria-current="page" className="nav-link"
                                         style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                                 </NavItem>
-                            </>
+                            </> : null
+                        }
+                        {isLoggedIn && !userType ?
+                            <>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">My Clients</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">My Account</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Edit My Profile</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <a aria-current="page" className="nav-link"
+                                        style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                                </NavItem>
+                            </> : null
                         }
                         {!isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+                                    <NavLink tag={RRNavLink} to="/loginParent">Parent Login</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+                                    <NavLink tag={RRNavLink} to="/loginBabysitter">Babysitter Login</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/registerParent" exact>Register as a parent</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/registerBabysitter" exact>Register as a babysitter</NavLink>
                                 </NavItem>
                             </>
                         }
                     </Nav>
                 </Collapse>
-            </Navbar>
-        </div>
+            </Navbar >
+        </div >
     );
 }
