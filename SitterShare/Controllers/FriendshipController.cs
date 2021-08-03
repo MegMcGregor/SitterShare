@@ -34,6 +34,13 @@ namespace SitterShare.Controllers
             return Ok(sittersInMyNetwork);
         }
 
+        private int GetCurrentUserProfileId()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var friendshipProfile = _parentRepository.GetParentByFireBaseId(firebaseUserId);
+            return friendshipProfile.Id;
+        }
+
         private Parent getCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
