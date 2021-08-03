@@ -1,11 +1,14 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "./Login";
+import LoginParent from "./LoginParent";
 import MySitterList from "./ParentSitter/MySitterList";
 import NetworkSitterList from "./Friendship/NetworkSitterList";
 import MyFriendList from "./Friendship/MyFriendList";
 import ParentUserProfile from "./Parent/ParentUserProfile";
-import Register from "./RegisterParent";
+import RegisterParent from "./RegisterParent";
+import RegisterBabysitter from "./RegisterBabysitter";
+import LoginBabysitter from "./LoginBabysitter";
+import MyBabysitterDetail from "./ParentSitter/MyBabysitterDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -19,16 +22,28 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ? <QuoteAddForm /> : <Redirect to="/login" />}
         </Route> */}
 
-                <Route path="/login">
-                    <Login />
+                <Route path="/loginParent">
+                    <LoginParent />
                 </Route>
 
-                <Route path="/register">
-                    <Register />
+                <Route path="/loginBabysitter">
+                    <LoginBabysitter />
                 </Route>
 
-                <Route path="/MySitterList">
+                <Route path="/registerParent">
+                    <RegisterParent />
+                </Route>
+
+                <Route path="/registerBabysitter">
+                    <RegisterBabysitter />
+                </Route>
+
+                <Route path="/MySitterList" exact>
                     {isLoggedIn ? <MySitterList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/MySitterList/details/:id(\d+)" exact>
+                    {isLoggedIn ? <MyBabysitterDetail /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/myfriendlist">

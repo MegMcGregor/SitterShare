@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Tabloid.Models;
 
 namespace SitterShare.Controllers
 {
@@ -34,7 +35,13 @@ namespace SitterShare.Controllers
             return Ok(babysitterUserProfile);
         }
 
-        [HttpGet("DoesUserExist/{parentFirebaseUid}")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Ok(_babysitterRepository.GetAll());
+        }
+
+        [HttpGet("DoesUserExist/{sitterFirebaseUid}")]
         public IActionResult DoesUserExist(string sitterFirebaseUid)
         {
             var babysitterProfile = _babysitterRepository.GetSitterByFirebaseId(sitterFirebaseUid);
@@ -43,6 +50,23 @@ namespace SitterShare.Controllers
                 return NotFound();
             }
             return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Post(Babysitter babysittertUserProfile)
+        {
+            babysittertUserProfile.UserTypeId = UserType.Babysitter_ID;
+            _babysitterRepository.Add(babysittertUserProfile);
+            return CreatedAtAction(
+                nameof(GetSitterByFirebaseId),
+                new { sitterFirebaseUid = babysittertUserProfile.SitterFirebaseUid },
+                babysittertUserProfile);
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q)
+        {
+            return Ok(_babysitterRepository.SearchForSittersByName(q));
         }
 
         private string GetCurrentFirebaseUserProfileId()

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
-import { login } from "../modules/authManager";
+import { loginBabysitter } from "../modules/authManager";
 
-export default function Login() {
+export default function LoginBabysitter() {
     const history = useHistory();
 
     const [email, setEmail] = useState();
@@ -11,7 +11,7 @@ export default function Login() {
 
     const loginSubmit = (e) => {
         e.preventDefault();
-        login(email, password)
+        loginBabysitter(email, password)
             .then(() => history.push("/"))
             .catch(() => alert("Login Failed"));
     };
@@ -31,7 +31,7 @@ export default function Login() {
                     <Button>Login</Button>
                 </FormGroup>
                 <em>
-                    Not registered? <Link to="register">Register</Link>
+                    Not registered? <Link to="registerBabysitter">Register</Link>
                 </em>
             </fieldset>
         </Form>

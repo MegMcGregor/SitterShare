@@ -46,6 +46,13 @@ namespace SitterShare.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Ok(_parentRepository.GetAll());
+        }
+
+
         [HttpPost]
         public IActionResult Post(Parent parentUserProfile)
         {
@@ -55,6 +62,12 @@ namespace SitterShare.Controllers
                 nameof(GetParentByFireBaseId),
                 new { parentFirebaseUid = parentUserProfile.ParentFirebaseUid },
                 parentUserProfile);
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q)
+        {
+            return Ok(_parentRepository.SearchForParentsByName(q));
         }
 
         private string GetCurrentFirebaseUserProfileId()
