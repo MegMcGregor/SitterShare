@@ -37,3 +37,30 @@ export const getUsersBabysitterById = (id) => {
         });
     });
 };
+
+export const addNewSitterConnection = (newParentSitterConnection) => {
+
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newParentSitterConnection)
+        })
+    });
+};
+
+export const deleteSitterFromMyList = (babysitterId) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${babysitterId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+    })
+};

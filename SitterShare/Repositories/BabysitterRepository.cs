@@ -104,57 +104,57 @@ namespace SitterShare.Repositories
             }
         }
 
-        public List<Babysitter> SearchForSittersByName(string criterion)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                    SELECT
-                    b.Id, 
-                    b.SitterFirebaseUID, 
-                    b.UserTypeId, 
-                    b.FirstName, 
-                    b.LastName, 
-                    b.Minor,
-                    b.Zipcode,
-                    b.Phone,
-                    b.Email,
-                    b.Bio,
-                    b.IsCprCertified,
-                    b.HasDriversLisence,
-                    b.HasTransportation,
-                    b.HasInfantExperience";
-                   
-                    var reader = cmd.ExecuteReader();
-                    var babysitters = new List<Babysitter>();
-                    while (reader.Read())
-                    {
-                        babysitters.Add(new Babysitter()
-                        {
-                            Id = DbUtils.GetInt(reader, "id"),
-                            SitterFirebaseUid = DbUtils.GetString(reader, "sitterfirebaseuid"),
-                            UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
-                            FirstName = DbUtils.GetString(reader, "firstname"),
-                            LastName = DbUtils.GetString(reader, "lastname"),
-                            isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
-                            Zipcode = DbUtils.GetInt(reader, "zipcode"),
-                            Email = DbUtils.GetString(reader, "email"),
-                            Phone = DbUtils.GetString(reader, "phone"),
-                            isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
-                            hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
-                            hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
-                            hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
-                        });
-                    }
+        //public List<Babysitter> SearchForSittersByName(string criterion)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //            SELECT
+        //            b.Id, 
+        //            b.SitterFirebaseUID, 
+        //            b.UserTypeId, 
+        //            b.FirstName, 
+        //            b.LastName, 
+        //            b.Minor,
+        //            b.Zipcode,
+        //            b.Phone,
+        //            b.Email,
+        //            b.Bio,
+        //            b.IsCprCertified,
+        //            b.HasDriversLisence,
+        //            b.HasTransportation,
+        //            b.HasInfantExperience";
 
-                    reader.Close();
-                    return babysitters;
-                }
-            }
-        }
+        //            var reader = cmd.ExecuteReader();
+        //            var babysitters = new List<Babysitter>();
+        //            while (reader.Read())
+        //            {
+        //                babysitters.Add(new Babysitter()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "id"),
+        //                    SitterFirebaseUid = DbUtils.GetString(reader, "sitterfirebaseuid"),
+        //                    UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
+        //                    FirstName = DbUtils.GetString(reader, "firstname"),
+        //                    LastName = DbUtils.GetString(reader, "lastname"),
+        //                    isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
+        //                    Zipcode = DbUtils.GetInt(reader, "zipcode"),
+        //                    Email = DbUtils.GetString(reader, "email"),
+        //                    Phone = DbUtils.GetString(reader, "phone"),
+        //                    isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
+        //                    hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
+        //                    hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
+        //                    hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
+        //                });
+        //            }
+
+        //            reader.Close();
+        //            return babysitters;
+        //        }
+        //    }
+        //}
 
         public List<Babysitter> GetAll()
         {
@@ -195,6 +195,7 @@ namespace SitterShare.Repositories
                             UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
                             FirstName = DbUtils.GetString(reader, "firstname"),
                             LastName = DbUtils.GetString(reader, "lastname"),
+                            Bio = DbUtils.GetString(reader, "bio"),
                             isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
                             Zipcode = DbUtils.GetInt(reader, "zipcode"),
                             Email = DbUtils.GetString(reader, "email"),
@@ -212,6 +213,69 @@ namespace SitterShare.Repositories
                     return babysitters;
                 }
             }
+        }
+
+        public Babysitter GetSitterById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"                    
+                    SELECT
+                    b.Id, 
+                    b.SitterFirebaseUID, 
+                    b.UserTypeId, 
+                    b.FirstName, 
+                    b.LastName, 
+                    b.Minor,
+                    b.Zipcode,
+                    b.Phone,
+                    b.Email,
+                    b.Bio,
+                    b.IsCprCertified,
+                    b.HasDriversLisence,
+                    b.HasTransportation,
+                    b.HasInfantExperience
+                    From Babysitter b 
+                    WHERE b.Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+
+                    var reader = cmd.ExecuteReader();
+                    Babysitter babysitter = null;
+
+                    if (reader.Read())
+                    {
+                        if (babysitter == null) ;
+                        {
+
+                            babysitter = new Babysitter()
+                            {
+                                Id = DbUtils.GetInt(reader, "id"),
+                                SitterFirebaseUid = DbUtils.GetString(reader, "sitterfirebaseuid"),
+                                UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
+                                FirstName = DbUtils.GetString(reader, "firstname"),
+                                LastName = DbUtils.GetString(reader, "lastname"),
+                                Bio = DbUtils.GetString(reader, "bio"),
+                                isMinor = reader.GetBoolean(reader.GetOrdinal("minor")),
+                                Zipcode = DbUtils.GetInt(reader, "zipcode"),
+                                Email = DbUtils.GetString(reader, "email"),
+                                Phone = DbUtils.GetString(reader, "phone"),
+                                isCprCertified = reader.GetBoolean(reader.GetOrdinal("iscprcertified")),
+                                hasDriversLisence = reader.GetBoolean(reader.GetOrdinal("hasdriverslisence")),
+                                hasTransportation = reader.GetBoolean(reader.GetOrdinal("hasTransportation")),
+                                hasInfantExperience = reader.GetBoolean(reader.GetOrdinal("hasInfantExperience"))
+                            };
+                        }
+
+                    }
+                    reader.Close();
+                    return babysitter;
+                }
+            }
+
         }
     }
 }

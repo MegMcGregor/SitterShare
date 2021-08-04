@@ -64,11 +64,12 @@ namespace SitterShare.Controllers
                 parentUserProfile);
         }
 
-        [HttpGet("search")]
-        public IActionResult Search(string q)
-        {
-            return Ok(_parentRepository.SearchForParentsByName(q));
-        }
+
+        //[HttpGet("search")]
+        //public IActionResult Search(string q)
+        //{
+        //    return Ok(_parentRepository.SearchForParentsByName(q));
+        //}
 
         private string GetCurrentFirebaseUserProfileId()
         {

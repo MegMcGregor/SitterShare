@@ -17,8 +17,6 @@ const ParentUserProfile = () => {
 
     }, []);
 
-    { console.log(user) }
-
     return (
         <>
             <div className="profile-container">

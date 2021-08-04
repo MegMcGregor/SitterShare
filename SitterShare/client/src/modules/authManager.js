@@ -121,6 +121,7 @@ export const getToken = () => {
 
 export const logout = () => {
     firebase.auth().signOut()
+    sessionStorage.clear()
 };
 
 

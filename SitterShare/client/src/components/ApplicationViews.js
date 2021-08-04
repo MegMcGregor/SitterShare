@@ -9,33 +9,32 @@ import RegisterParent from "./RegisterParent";
 import RegisterBabysitter from "./RegisterBabysitter";
 import LoginBabysitter from "./LoginBabysitter";
 import MyBabysitterDetail from "./ParentSitter/MyBabysitterDetails";
+import GlobalSittersList from "./Babysitter/GlobalSitterList";
+import GlobalSitterDetailCard from "./Babysitter/GlobalSitterDetailCard"
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
         <main>
             <Switch>
-                {/* <Route path="/" exact>
-          {isLoggedIn ? <QuoteList /> : <Redirect to="/login" />}
-        </Route>
 
-        <Route path="/add">
-          {isLoggedIn ? <QuoteAddForm /> : <Redirect to="/login" />}
-        </Route> */}
-
-                <Route path="/loginParent">
+                <Route path="/loginParent" exact>
                     <LoginParent />
                 </Route>
 
-                <Route path="/loginBabysitter">
+                <Route path="/loginBabysitter" exact>
                     <LoginBabysitter />
                 </Route>
 
-                <Route path="/registerParent">
+                <Route path="/registerParent" exact>
                     <RegisterParent />
                 </Route>
 
-                <Route path="/registerBabysitter">
+                <Route path="/registerBabysitter" exact>
                     <RegisterBabysitter />
+                </Route>
+
+                <Route path="/" exact>
+                    {isLoggedIn ? null : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/MySitterList" exact>
@@ -58,9 +57,14 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <NetworkSitterList /> : <Redirect to="/login" />}
                 </Route>
 
-                {/* <Route path="/myclientlist">
-                    <myClientList />
-                </Route> */}
+                <Route path="/findsitters" exact>
+                    {isLoggedIn ? <GlobalSittersList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/findsitters/details/:id(\d+)" exact>
+                    {isLoggedIn ? <GlobalSitterDetailCard /> : <Redirect to="/login" />}
+                </Route>
+
             </Switch>
         </main>
     );

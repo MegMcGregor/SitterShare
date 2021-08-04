@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SitterShare.Models
 {
-    public class ParentSitter
+    public class parentSitter
     {
         public int Id { get; set; }
         public int ParentId { get; set; }

@@ -125,7 +125,7 @@ namespace SitterShare.Repositories
                                     FirstName = DbUtils.GetString(reader, "FriendFirstName"),
                                     LastName = DbUtils.GetString(reader, "FriendLastName"),
                                 },
-                                SitterConnection = new ParentSitter()
+                                SitterConnection = new parentSitter()
                                 {
                                     Id = DbUtils.GetInt(reader, "NetworkConnectionId"),
                                     ParentId = DbUtils.GetInt(reader, "FriendConnectionId"),

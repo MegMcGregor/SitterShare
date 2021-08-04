@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { loginBabysitter } from "../modules/authManager";
+import { userTypeContext } from "../modules/UserTypeProvider";
 
 export default function LoginBabysitter() {
     const history = useHistory();
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState()
+    const { setUserType } = useContext(userTypeContext)
     const [password, setPassword] = useState();
 
     const loginSubmit = (e) => {
         e.preventDefault();
         loginBabysitter(email, password)
-            .then(() => history.push("/"))
+            .then(() => {
+                setUserType(false)
+                history.push("/")
+            })
             .catch(() => alert("Login Failed"));
     };
 
