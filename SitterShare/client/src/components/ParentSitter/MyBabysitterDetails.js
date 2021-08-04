@@ -3,6 +3,7 @@ import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getUsersBabysitterById } from "../../modules/parentSitterManager";
+import { deleteSitterFromMyList } from "../../modules/parentSitterManager";
 import { Link } from "react-router-dom";
 
 export const MyBabysitterDetail = () => {
@@ -14,11 +15,20 @@ export const MyBabysitterDetail = () => {
     const getMyBabysitterDetails = () => {
         getUsersBabysitterById(id)
             .then(res => {
-                console.log(res)
                 setBabysitter(res.babysitter)
                 setBabysitterDetails(res)
             })
     }
+
+    const handleDelete = () => {
+        if (window.confirm('Are you sure you want to remove this sitter from your list?')) {
+            deleteSitterFromMyList(id).then(() => {
+                history.push(`/mysitterlist/`);
+            });
+        }
+    };
+
+    console.log(babysitter)
 
     useEffect(() => {
         getMyBabysitterDetails();
@@ -26,8 +36,8 @@ export const MyBabysitterDetail = () => {
 
 
     return (
-        <Card >
-            < CardBody >
+        <Card className="m-2 p-2 w-50 mx-auto">
+            < CardBody className="m-3" >
                 <p>
                     <strong>Name: {babysitter.firstName} {babysitter.lastName}</strong>
                 </p>
@@ -41,7 +51,7 @@ export const MyBabysitterDetail = () => {
                 <p><strong>Reliable Transportation :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
                 <p><strong>Experience with infants :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
             </CardBody >
-            <button>Delete</button>
+            <button onClick={handleDelete}>Remove From My Babysitter List</button>
         </Card >
     )
 

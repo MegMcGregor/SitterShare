@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 const FriendCard = ({ friend }) => {
 
-    { console.log(friend) }
-
     return (
         <Card >
             < CardBody >

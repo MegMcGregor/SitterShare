@@ -42,6 +42,30 @@ namespace SitterShare.Controllers
             return Ok(babysitter);
         }
 
+        [HttpPost]
+        public IActionResult Post(parentSitter ParentSitterConnection)
+        {
+            var user = getCurrentUserProfile();
+            ParentSitterConnection.ParentId = user.Id;
+           _parentSitterRepository.AddSitterToMyList(ParentSitterConnection);
+            return NoContent();
+        }
+
+        [HttpDelete("{babysitterId}")]
+        public IActionResult Delete(int babysitterId)
+        {
+            var user = getCurrentUserProfile();
+            _parentSitterRepository.Delete(babysitterId, user.Id);
+            return NoContent();
+        }
+
+
+        private Parent getCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _parentRepository.GetParentByFireBaseId(firebaseUserId);
+        }
+
         //[HttpGet("getMyClients")]
         //public IActionResult GetMyClients()
         //{
@@ -50,37 +74,6 @@ namespace SitterShare.Controllers
         //    return Ok(myClients);
         //}
 
-        //public void AddtoMySitterListt(ParentSitter connection)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                    INSERT INTO POST (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId, isDeleted)
-        //                    OUTPUT INSERTED.ID
-        //                    VALUES(
-        //                        @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime, 1, @CategoryId, @UserProfileId, 0 )";
 
-        //            DbUtils.AddParameter(cmd, @"Title", post.Title);
-        //            DbUtils.AddParameter(cmd, "@Content", post.Content);
-        //            DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
-        //            DbUtils.AddParameter(cmd, "@CreateDateTime", post.CreateDateTime);
-        //            DbUtils.AddParameter(cmd, "@PublishDateTime", post.PublishDateTime);
-        //            DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
-        //            DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
-
-        //            post.Id = (int)cmd.ExecuteScalar();
-
-        //        }
-        //    }
-        //}
-
-        private Parent getCurrentUserProfile()
-        {
-            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _parentRepository.GetParentByFireBaseId(firebaseUserId);
-        }
     }
 }

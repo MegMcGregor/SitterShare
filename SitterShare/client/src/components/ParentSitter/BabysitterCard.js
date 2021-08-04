@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 
 const BabysitterCard = ({ babysitter }) => {
 
-    { console.log(babysitter.babysitter.firstName) }
     return (
-        <Card >
-            < CardBody >
+        <Card className="m-2 p-2 w-50 mx-auto">
+            < CardBody className="m-3">
                 <p>
                     <strong>{babysitter.babysitter.firstName}{babysitter.babysitter.lastName}</strong>
                 </p>

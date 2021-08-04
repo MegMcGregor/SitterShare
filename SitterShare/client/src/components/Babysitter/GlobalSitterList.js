@@ -10,8 +10,6 @@ const GlobalSittersList = () => {
         getAllBabysitters().then(sitters => setSitters(sitters));
     };
 
-    { console.log(sitters) }
-
     useEffect(() => {
         getSitters();
     }, []);

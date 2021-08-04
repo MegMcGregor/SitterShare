@@ -78,11 +78,11 @@ namespace SitterShare.Controllers
                 babysittertUserProfile);
         }
 
-        [HttpGet("search")]
-        public IActionResult Search(string q)
-        {
-            return Ok(_babysitterRepository.SearchForSittersByName(q));
-        }
+        //[HttpGet("search")]
+        //public IActionResult Search(string q)
+        //{
+        //    return Ok(_babysitterRepository.SearchForSittersByName(q));
+        //}
 
         private string GetCurrentFirebaseUserProfileId()
         {

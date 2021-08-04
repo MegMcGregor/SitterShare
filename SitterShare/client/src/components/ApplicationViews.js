@@ -33,6 +33,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <RegisterBabysitter />
                 </Route>
 
+                <Route path="/" exact>
+                    {isLoggedIn ? null : <Redirect to="/login" />}
+                </Route>
+
                 <Route path="/MySitterList" exact>
                     {isLoggedIn ? <MySitterList /> : <Redirect to="/login" />}
                 </Route>

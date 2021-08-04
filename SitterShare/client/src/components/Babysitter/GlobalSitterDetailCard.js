@@ -3,6 +3,7 @@ import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getBabysitterById } from "../../modules/babysitterManager";
+import { addNewSitterConnection } from "../../modules/parentSitterManager"
 import { Link } from "react-router-dom";
 
 export const GlobalSitterDetailCard = () => {
@@ -11,8 +12,15 @@ export const GlobalSitterDetailCard = () => {
     const [sitter, setSitter] = useState({});
     const history = useHistory();
 
-    ///add an addSitterToMyListFunction
-    ///Call on button onClick={handleAdd}
+
+    const handleAdd = () => {
+        debugger
+        let newParentSitterConnection = {
+            parentId: 0,
+            babysitterId: sitter.id,
+        }
+        addNewSitterConnection(newParentSitterConnection).then(() => history.push("/findsitters"));
+    }
 
     const getSitterDeltails = () => {
         getBabysitterById(id)
@@ -37,7 +45,8 @@ export const GlobalSitterDetailCard = () => {
                 <p><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
                 <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
             </CardBody >
-            <button>Add Sitter to My List</button>
+            <button onClick={handleAdd}>Add Sitter to My List</button>
+            <button onClick={() => history.goBack()}>back</button>
         </Card >
     )
 }

@@ -18,8 +18,6 @@ const MySitterList = () => {
         GetMySitterList()
     }, []);
 
-    { console.log(babysitters) }
-
     return (
         <>
             <h2 className="text-center">My Sitter List</h2>

@@ -12,6 +12,6 @@ namespace SitterShare.Models
         public int FriendId { get; set; }
         public Parent User { get; set; }
         public Parent Friend { get; set; }
-        public ParentSitter SitterConnection { get; set; }
+        public parentSitter SitterConnection { get; set; }
     }
 }

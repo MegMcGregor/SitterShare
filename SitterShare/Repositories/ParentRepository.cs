@@ -151,56 +151,56 @@ namespace SitterShare.Repositories
             }
         }
 
-        public List<Parent> SearchForParentsByName(string criterion)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                    SELECT
-                    p.Id, 
-                    p.parentFireBaseUId, 
-                    p.UserTypeId,
-                    p.FirstName, 
-                    p.LastName, 
-                    p.Address, 
-                    p.City,
-                    p.State,
-                    p.Zipcode,
-                    p.Phone,
-                    p.Email,
-                    p.NumberOfKids
-                    From Parent p
-                    WHERE p.[firstName] LIKE @Criterion
-                    ORDER BY p.[firstName] DESC";
-                    DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
-                    var reader = cmd.ExecuteReader();
-                    var parents = new List<Parent>();
-                    while (reader.Read())
-                    {
-                        parents.Add(new Parent()
-                        {
-                            Id = DbUtils.GetInt(reader, "id"),
-                            ParentFirebaseUid = DbUtils.GetString(reader, "parentfirebaseuid"),
-                            UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
-                            FirstName = DbUtils.GetString(reader, "firstname"),
-                            LastName = DbUtils.GetString(reader, "lastname"),
-                            Address = DbUtils.GetString(reader, "address"),
-                            City = DbUtils.GetString(reader, "city"),
-                            Zipcode = DbUtils.GetInt(reader, "zipcode"),
-                            Email = DbUtils.GetString(reader, "email"),
-                            Phone = DbUtils.GetString(reader, "phone"),
-                            NumberOfKids = DbUtils.GetInt(reader, "numberofkids")
-                        });
-                    }
+        //public List<Parent> SearchForParentsByName(string criterion)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //            SELECT
+        //            p.Id, 
+        //            p.parentFireBaseUId, 
+        //            p.UserTypeId,
+        //            p.FirstName, 
+        //            p.LastName, 
+        //            p.Address, 
+        //            p.City,
+        //            p.State,
+        //            p.Zipcode,
+        //            p.Phone,
+        //            p.Email,
+        //            p.NumberOfKids
+        //            From Parent p
+        //            WHERE p.[firstName] LIKE @Criterion
+        //            ORDER BY p.[firstName] DESC";
+        //            DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+        //            var reader = cmd.ExecuteReader();
+        //            var parents = new List<Parent>();
+        //            while (reader.Read())
+        //            {
+        //                parents.Add(new Parent()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "id"),
+        //                    ParentFirebaseUid = DbUtils.GetString(reader, "parentfirebaseuid"),
+        //                    UserTypeId = DbUtils.GetInt(reader, "usertypeid"),
+        //                    FirstName = DbUtils.GetString(reader, "firstname"),
+        //                    LastName = DbUtils.GetString(reader, "lastname"),
+        //                    Address = DbUtils.GetString(reader, "address"),
+        //                    City = DbUtils.GetString(reader, "city"),
+        //                    Zipcode = DbUtils.GetInt(reader, "zipcode"),
+        //                    Email = DbUtils.GetString(reader, "email"),
+        //                    Phone = DbUtils.GetString(reader, "phone"),
+        //                    NumberOfKids = DbUtils.GetInt(reader, "numberofkids")
+        //                });
+        //            }
 
-                    reader.Close();
-                    return parents;
-                }
-            }
-        }
+        //            reader.Close();
+        //            return parents;
+        //        }
+        //    }
+        //}
 
     }
 }
