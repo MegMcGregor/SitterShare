@@ -52,6 +52,21 @@ namespace SitterShare.Controllers
             return Ok();
         }
 
+        [HttpGet("ById/{id}")]
+        public IActionResult GetSitterById(int id)
+        {
+            var babysitter = _babysitterRepository.GetSitterById(id);
+            return Ok(babysitter);
+        }
+
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    _babysitterRepository.Delete(id);
+        //    return NoContent();
+        //}
+
+
         [HttpPost]
         public IActionResult Post(Babysitter babysittertUserProfile)
         {

@@ -9,10 +9,12 @@ export const GlobalSitterCard = ({ sitter }) => {
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
-                <p><b>Name: </b>{sitter.firstName} {sitter.LastName}</p>
+                <p><b>Name: </b>{sitter.firstName} {sitter.lastName}</p>
                 <p><b>Bio: </b>{sitter.bio}</p>
                 <div>
-                    <button className="btn btn-danger">Add to my sitter list</button>
+                    <button >
+                        <Link to={`/findsitters/${sitter.id}`}>view details</Link>
+                    </button>
                 </div>
             </CardBody>
         </Card>
