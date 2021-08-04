@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { userTypeContext } from "../modules/UserTypeProvider";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { registerBabysitter } from "../modules/authManager";
 
 export default function RegisterBabysitter() {
     const history = useHistory();
-
+    const { setUserType } = useContext(userTypeContext)
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [zipcode, setZipcode] = useState();
@@ -27,7 +28,11 @@ export default function RegisterBabysitter() {
         } else {
             const userProfile = { firstName, lastName, isMinor, zipcode, phone, email, bio, isCprCertified, hasTransportation, hasDriversLisence, hasInfantExperience };
             registerBabysitter(userProfile, password)
-                .then(() => history.push("/"));
+                .then(() => {
+                    setUserType(false);
+                    history.push("/")
+                });
+
         }
     };
 

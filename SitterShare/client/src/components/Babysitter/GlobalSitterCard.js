@@ -13,7 +13,7 @@ export const GlobalSitterCard = ({ sitter }) => {
                 <p><b>Bio: </b>{sitter.bio}</p>
                 <div>
                     <button >
-                        <Link to={`/findsitters/${sitter.id}`}>view details</Link>
+                        <Link to={`/findsitters/details/${sitter.id}`}>view details</Link>
                     </button>
                 </div>
             </CardBody>

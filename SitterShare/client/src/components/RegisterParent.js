@@ -30,6 +30,7 @@ export default function RegisterParent() {
             registerParent(parentUserProfile, password)
                 .then(() => {
                     setUserType(true)
+                    sessionStorage.setItem("userType", true)
                     history.push("/")
                 });
         }

@@ -53,11 +53,11 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <NetworkSitterList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/findsitters">
+                <Route path="/findsitters" exact>
                     {isLoggedIn ? <GlobalSittersList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/findsitters/:id(/d+)" exact>
+                <Route path="/findsitters/details/:id(\d+)" exact>
                     {isLoggedIn ? <GlobalSitterDetailCard /> : <Redirect to="/login" />}
                 </Route>
 

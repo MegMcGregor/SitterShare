@@ -24,8 +24,8 @@ export const GlobalSitterDetailCard = () => {
     }, []);
 
     return (
-        <Card >
-            < CardBody >
+        <Card className="m-2 p-2 w-50 mx-auto">
+            < CardBody className="m-3">
                 <p>
                     <strong>Name: {sitter.firstName} {sitter.lastName}</strong>
                 </p>

@@ -15,6 +15,7 @@ export default function LoginParent() {
         loginParent(email, password)
             .then(() => {
                 setUserType(true)
+                sessionStorage.setItem("userType", true)
                 history.push("/")
             })
             .catch(() => alert("Login Failed"));
