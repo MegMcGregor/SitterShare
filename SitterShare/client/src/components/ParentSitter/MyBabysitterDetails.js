@@ -31,9 +31,17 @@ export const MyBabysitterDetail = () => {
                 <p>
                     <strong>Name: {babysitter.firstName} {babysitter.lastName}</strong>
                 </p>
-                <p><strong>Bio :</strong>{babysitter.bio}</p>
-                <button>Delete</button>
+                <p><strong>Bio :</strong> {babysitter.bio}</p>
+                <p><strong>Age Group :</strong> {babysitter.isMinor ? "18 & under" : "18 years +"}</p>
+                <p><strong>Phone :</strong> {babysitter.phone}</p>
+                <p><strong>Email :</strong> {babysitter.email}</p>
+                <p><strong>Zipcode :</strong> {babysitter.zipcode}</p>
+                <p><strong>CPR Certified :</strong> {babysitter.isCprCertified ? "yes" : "no"}</p>
+                <p><strong>Valid Driver's Lisence :</strong> {babysitter.hasDriversLisence ? "yes" : "no"}</p>
+                <p><strong>Reliable Transportation :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
+                <p><strong>Experience with infants :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
             </CardBody >
+            <button>Delete</button>
         </Card >
     )
 
