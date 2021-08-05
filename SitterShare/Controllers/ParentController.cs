@@ -52,6 +52,17 @@ namespace SitterShare.Controllers
             return Ok(_parentRepository.GetAll());
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Parent parent)
+        {
+            if (id != parent.Id)
+            {
+                return BadRequest();
+            }
+            _parentRepository.Update(parent);
+            return NoContent();
+        }
+
 
         [HttpPost]
         public IActionResult Post(Parent parentUserProfile)

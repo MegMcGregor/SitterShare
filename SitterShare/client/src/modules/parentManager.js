@@ -71,3 +71,22 @@ export const getParentById = (id) => {
         });
     });
 };
+
+export const updateParentProfile = (parent) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${parent.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(parent)
+        }).then((res) => {
+            if (!res.ok) {
+                window.alert('You are unable to edit this profile.');
+            }
+        })
+
+    });
+};

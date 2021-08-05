@@ -209,6 +209,43 @@ namespace SitterShare.Repositories
 
         }
 
+        public void Update(Parent parent)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Parent
+                           SET 
+                               FirstName=@firstName,
+                               LastName=@lastName,
+                               Address=@ddress,
+                               City=@city,
+                               State=@state,
+                               Zipcode=@zipcode,
+                               Phone=@phone,
+                               NumberOfKids=@numberofkids
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", parent.Id);
+                    DbUtils.AddParameter(cmd, "@ParentFirebaseUid", parent.ParentFirebaseUid);
+                    DbUtils.AddParameter(cmd, "@UserTypeId", parent.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@FirstName", parent.FirstName);
+                    DbUtils.AddParameter(cmd, "@Address", parent.Address);
+                    DbUtils.AddParameter(cmd, "@City", parent.City);
+                    DbUtils.AddParameter(cmd, "@State", parent.State);
+                    DbUtils.AddParameter(cmd, "@Zipcode", parent.Zipcode);
+                    DbUtils.AddParameter(cmd, "@Phone", parent.Phone);
+                    DbUtils.AddParameter(cmd, "@Email", parent.Email);
+                    DbUtils.AddParameter(cmd, "@NumberOfKids", parent.NumberOfKids);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         //public List<Parent> SearchForParentsByName(string criterion)
         //{
         //    using (var conn = Connection)

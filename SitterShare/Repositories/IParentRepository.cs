@@ -9,7 +9,7 @@ namespace SitterShare.Repositories
         //public List<Parent> SearchForParentsByName(string criterion);
         public void Add(Parent parentUserProfile);
         public Parent GetParentById(int id);
+        public void Update(Parent parent);
         public List<Parent> GetAll();
-
     }
 }
