@@ -31,7 +31,7 @@ export default function Header({ isLoggedIn }) {
                                     <NavLink tag={RRNavLink} to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">Find Friends</NavLink>
+                                    <NavLink tag={RRNavLink} to="/findfriends">Find Friends</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/findsitters">Find Sitters</NavLink>

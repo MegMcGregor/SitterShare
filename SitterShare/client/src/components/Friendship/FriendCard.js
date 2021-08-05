@@ -1,15 +1,18 @@
 
 import React, { useState, useEffect } from "react";
 import { Card, CardBody } from "reactstrap";
+import { removeFriend } from "../../modules/friendshipManager";
 import { Link } from 'react-router-dom';
 
-const FriendCard = ({ friend }) => {
 
+const FriendCard = ({ handleUnfriend, friend }) => {
+
+    console.log(friend)
     return (
-        <Card >
-            < CardBody >
+        <Card className="m-2 p-2 w-50 mx-auto">
+            < CardBody className="m-3" >
                 <p>{friend.friend.firstName} {friend.friend.lastName}</p>
-                <button>Remove</button>
+                <button onClick={() => handleUnfriend(friend.id)}>Unfriend</button>
             </ CardBody >
         </Card >
     );

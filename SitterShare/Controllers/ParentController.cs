@@ -64,6 +64,13 @@ namespace SitterShare.Controllers
                 parentUserProfile);
         }
 
+        [HttpGet("ById/{id}")]
+        public IActionResult GetParentById(int id)
+        {
+            var parent = _parentRepository.GetParentById(id);
+            return Ok(parent);
+        }
+
 
         //[HttpGet("search")]
         //public IActionResult Search(string q)

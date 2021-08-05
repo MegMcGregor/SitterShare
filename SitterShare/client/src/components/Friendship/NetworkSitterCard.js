@@ -11,6 +11,9 @@ const NetworkSitterCard = ({ babysitter }) => {
                 <p>
                     <strong>{babysitter.sitterConnection.babysitter.firstName}</strong>
                 </p>
+                <p>
+                    <strong>{babysitter.friend.firstName} is a connection</strong>
+                </p>
                 <button>details</button>
             </CardBody >
         </Card >

@@ -38,6 +38,33 @@ export const getNetworkSitters = () => {
     });
 };
 
+export const addFriendship = (FriendConnection) => {
+
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(FriendConnection)
+        })
+    });
+};
+
+export const removeFriend = (id) => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+    })
+};
+
 
 
 

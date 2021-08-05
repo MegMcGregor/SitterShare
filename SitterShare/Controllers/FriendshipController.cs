@@ -28,10 +28,27 @@ namespace SitterShare.Controllers
         }
 
         [HttpGet("GetSittersInMyNetwork")]
-        public IActionResult GetSittersInMyNetwork()
+        public IActionResult GetSittersInMyNetwork(int id)
         {
-            var sittersInMyNetwork = _friendshipRepository.GetSittersInMyNetwork();
+            int userId = GetCurrentUserProfileId();
+            var sittersInMyNetwork = _friendshipRepository.GetSittersInMyNetwork(userId);
             return Ok(sittersInMyNetwork);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Friendship FriendConnection)
+        {
+            var user = getCurrentUserProfile();
+            FriendConnection.UserId = user.Id;
+            _friendshipRepository.AddFriendToMyList(FriendConnection);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _friendshipRepository.Delete(id);
+            return NoContent();
         }
 
         private int GetCurrentUserProfileId()

@@ -59,13 +59,6 @@ namespace SitterShare.Controllers
             return Ok(babysitter);
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _babysitterRepository.Delete(id);
-        //    return NoContent();
-        //}
-
 
         [HttpPost]
         public IActionResult Post(Babysitter babysittertUserProfile)

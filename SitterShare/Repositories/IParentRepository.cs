@@ -8,6 +8,7 @@ namespace SitterShare.Repositories
         Parent GetParentByFireBaseId(string parentFirebaseUid);
         //public List<Parent> SearchForParentsByName(string criterion);
         public void Add(Parent parentUserProfile);
+        public Parent GetParentById(int id);
         public List<Parent> GetAll();
 
     }

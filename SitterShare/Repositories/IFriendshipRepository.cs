@@ -7,6 +7,8 @@ namespace SitterShare.Repositories
     {
         List<Friendship> GetMyFriendList(int id);
         //public List<Friendship> GetSitterInMyNetworkById(int id);
-        List<Friendship> GetSittersInMyNetwork();
+        List<Friendship> GetSittersInMyNetwork(int id);
+        public void AddFriendToMyList(Friendship FriendConnection);
+        public void Delete(int id);
     }
 }
