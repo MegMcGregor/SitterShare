@@ -52,10 +52,10 @@ export const addFriendship = (FriendConnection) => {
     });
 };
 
-export const removeFriend = (id) => {
+export const removeFriend = (friendId, userId) => {
     return getToken().then((token) => {
 
-        return fetch(`${baseUrl}/${id}`, {
+        return fetch(`${baseUrl}/${friendId}/${userId}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`

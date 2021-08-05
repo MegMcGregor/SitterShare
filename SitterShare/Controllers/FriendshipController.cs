@@ -44,10 +44,10 @@ namespace SitterShare.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{friendId}/{userId}")]
+        public IActionResult Delete(int friendId, int userId)
         {
-            _friendshipRepository.Delete(id);
+            _friendshipRepository.Delete(friendId, userId);
             return NoContent();
         }
 

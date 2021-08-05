@@ -12,7 +12,7 @@ const FriendCard = ({ handleUnfriend, friend }) => {
         <Card className="m-2 p-2 w-50 mx-auto">
             < CardBody className="m-3" >
                 <p>{friend.friend.firstName} {friend.friend.lastName}</p>
-                <button onClick={() => handleUnfriend(friend.id)}>Unfriend</button>
+                <button onClick={() => handleUnfriend(friend.friendId, friend.userId)}>Unfriend</button>
             </ CardBody >
         </Card >
     );

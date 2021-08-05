@@ -25,21 +25,21 @@ const EditParentProfile = () => {
         evt.preventDefault();
         setIsLoading(true);
 
-        const editedProfile = {
-            id: id,
-            ParentFirebaseUid: editedProfile.ParentFirebaseUid,
-            UserTypeId: editedProfile.UserTypeId,
-            FirstName: editedProfile.FirstName,
-            LastName: editedProfile.LastName,
-            Address: editedProfile.Address,
-            City: editedProfile.City,
-            State: editedProfile.State,
-            Zipcode: editedProfile.Zipcode,
-            Phone: editedProfile.Phone,
-            Email: editedProfile.Email,
-            NumberOfKids: editedProfile.NumberOfKids
-        };
-        updateParentProfile(editedProfile)
+        // const editedProfile = {
+        //     id: id,
+        //     ParentFirebaseUid: editedProfile.ParentFirebaseUid,
+        //     UserTypeId: editedProfile.UserTypeId,
+        //     FirstName: editedProfile.FirstName,
+        //     LastName: editedProfile.LastName,
+        //     Address: editedProfile.Address,
+        //     City: editedProfile.City,
+        //     State: editedProfile.State,
+        //     Zipcode: editedProfile.Zipcode,
+        //     Phone: editedProfile.Phone,
+        //     Email: editedProfile.Email,
+        //     NumberOfKids: editedProfile.NumberOfKids
+        // };
+        updateParentProfile(profile)
             .then(() => {
                 history.push(`/parentprofile`);
             });
@@ -61,35 +61,35 @@ const EditParentProfile = () => {
                 <Form>
                     <FormGroup>
                         <Label htmlFor="firstName">first name</Label>
-                        <Input id="firstName" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="firstName" value={profile.firstName} type="text" autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="firstName">last name</Label>
-                        <Input id="lastName" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="lastName" value={profile.lastName} type="text" autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="address">address</Label>
-                        <Input id="address" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="address" type="text" value={profile.address} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="city">city</Label>
-                        <Input id="city" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="city" type="text" value={profile.city} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="state">state</Label>
-                        <Input id="state" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="state" type="text" value={profile.state} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="zipcode">zipcode</Label>
-                        <Input id="zipcode" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="zipcode" type="text" value={profile.zipcode} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="numberOfKids">number of kids</Label>
-                        <Input id="numberOfKids" type="number" autoFocus onChange={handleInputChange} />
+                        <Input id="numberOfKids" type="number" value={profile.numberOfKids} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label htmlFor="phone">phone number</Label>
-                        <Input id="phone" type="text" autoFocus onChange={handleInputChange} />
+                        <Input id="phone" type="text" value={profile.phone} autoFocus onChange={handleInputChange} />
                     </FormGroup>
                     <Button onClick={handleUpdate}>Submit</Button>
                     <Button onClick={() => history.push(`/parentprofile`)}>Cancel</Button>

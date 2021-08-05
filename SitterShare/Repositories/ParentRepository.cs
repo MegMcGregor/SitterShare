@@ -221,7 +221,7 @@ namespace SitterShare.Repositories
                            SET 
                                FirstName=@firstName,
                                LastName=@lastName,
-                               Address=@ddress,
+                               Address=@address,
                                City=@city,
                                State=@state,
                                Zipcode=@zipcode,
@@ -233,6 +233,7 @@ namespace SitterShare.Repositories
                     DbUtils.AddParameter(cmd, "@ParentFirebaseUid", parent.ParentFirebaseUid);
                     DbUtils.AddParameter(cmd, "@UserTypeId", parent.UserTypeId);
                     DbUtils.AddParameter(cmd, "@FirstName", parent.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", parent.LastName);
                     DbUtils.AddParameter(cmd, "@Address", parent.Address);
                     DbUtils.AddParameter(cmd, "@City", parent.City);
                     DbUtils.AddParameter(cmd, "@State", parent.State);

@@ -9,6 +9,6 @@ namespace SitterShare.Repositories
         //public List<Friendship> GetSitterInMyNetworkById(int id);
         List<Friendship> GetSittersInMyNetwork(int id);
         public void AddFriendToMyList(Friendship FriendConnection);
-        public void Delete(int id);
+        public void Delete(int friendId, int userId);
     }
 }

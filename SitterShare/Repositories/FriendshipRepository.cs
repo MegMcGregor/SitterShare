@@ -81,7 +81,7 @@ namespace SitterShare.Repositories
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int friendId, int userId)
         {
             using (var conn = Connection)
             {
@@ -90,10 +90,11 @@ namespace SitterShare.Repositories
                 {
                     cmd.CommandText = @"
                             DELETE from Friendship
-                            WHERE Id = @id
+                            WHERE (friendId=@friendId OR userId=@friendId) AND (friendId=@userId OR userId=@userId)
                         ";
 
-                    DbUtils.AddParameter(cmd, "@id", id);
+                    DbUtils.AddParameter(cmd, "@friendId", friendId);
+                    DbUtils.AddParameter(cmd, "@userId", userId);
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -14,11 +14,10 @@ const MyFriendList = () => {
             .then(friends => setFriends(friends))
     }
 
-    const handleUnfriend = (id) => {
+    const handleUnfriend = (friendId, userId) => {
         if (window.confirm('Are you sure you want to unfriend')) {
-            removeFriend(id)
+            removeFriend(friendId, userId)
                 .then(() => GetMyFriendList())
-
         }
     };
 
