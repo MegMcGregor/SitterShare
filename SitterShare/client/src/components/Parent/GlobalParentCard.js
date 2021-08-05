@@ -12,7 +12,7 @@ export const GlobalParentCard = ({ parent }) => {
                 <p><b>Name: </b>{parent.firstName} {parent.lastName}</p>
                 <div>
                     <button >
-                        <Link to={`/findfriends/details/${parent.id}`}>view details</Link>
+                        <Link to={`/findfriends/details/${parent.id}`}>view profile</Link>
                     </button>
                 </div>
             </CardBody>

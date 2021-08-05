@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Card, CardBody } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { loginBabysitter } from "../modules/authManager";
 import { userTypeContext } from "../modules/UserTypeProvider";
@@ -23,23 +23,27 @@ export default function LoginBabysitter() {
     };
 
     return (
-        <Form onSubmit={loginSubmit}>
-            <fieldset>
-                <FormGroup>
-                    <Label for="email">Email</Label>
-                    <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="password">Password</Label>
-                    <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-                </FormGroup>
-                <FormGroup>
-                    <Button>Login</Button>
-                </FormGroup>
-                <em>
-                    Not registered? <Link to="registerBabysitter">Register</Link>
-                </em>
-            </fieldset>
-        </Form>
+        <Card className="m-2 p-2 w-50 mx-auto">
+            < CardBody className="m-3" >
+                <Form onSubmit={loginSubmit}>
+                    <fieldset>
+                        <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="password">Password</Label>
+                            <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Button>Login</Button>
+                        </FormGroup>
+                        <em>
+                            Not registered? <Link to="registerBabysitter">Register</Link>
+                        </em>
+                    </fieldset>
+                </Form>
+            </CardBody>
+        </Card>
     );
 }

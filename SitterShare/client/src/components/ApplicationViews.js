@@ -14,6 +14,7 @@ import GlobalSitterDetailCard from "./Babysitter/GlobalSitterDetailCard"
 import GlobalParentList from "./Parent/GlobalParentList"
 import GlobalParentDetailCard from "./Parent/GlobalParentDetailCard";
 import EditParentProfile from "./Parent/EditUserProfile";
+import BabysitterUserProfile from "./Babysitter/BabysitterUserProfile";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -50,6 +51,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/myfriendlist">
                     {isLoggedIn ? <MyFriendList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/BabysitterProfile" exact>
+                    {isLoggedIn ? <BabysitterUserProfile /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/ParentProfile" exact>
