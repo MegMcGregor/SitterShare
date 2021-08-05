@@ -20,7 +20,7 @@ const MySitterList = () => {
 
     return (
         <>
-            <h2 className="text-center">My Sitter List</h2>
+            <h2 className="text-center">Sitters in My Network</h2>
             <div className="col m-2 p-2 justify-content-center">
                 {babysitters.map((babysitter) => (
                     <NetworkSitterCard babysitter={babysitter} key={babysitter.sitterConnection.babysitter.id} />

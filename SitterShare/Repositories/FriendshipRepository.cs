@@ -63,7 +63,44 @@ namespace SitterShare.Repositories
             }
         }
 
-        public List<Friendship> GetSittersInMyNetwork()
+        public void AddFriendToMyList(Friendship FriendConnection)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Friendship (UserId, FriendId)
+                                    OUTPUT INSERTED.ID
+                                    VALUES ( @userId, @friendId)";
+                    cmd.Parameters.AddWithValue("@userId", FriendConnection.UserId);
+                    cmd.Parameters.AddWithValue("@friendId", FriendConnection.FriendId);
+
+                    FriendConnection.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int friendId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE from Friendship
+                            WHERE (friendId=@friendId OR userId=@friendId) AND (friendId=@userId OR userId=@userId)
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@friendId", friendId);
+                    DbUtils.AddParameter(cmd, "@userId", userId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<Friendship> GetSittersInMyNetwork(int id)
         {
             using (var conn = Connection)
             {
@@ -102,7 +139,10 @@ namespace SitterShare.Repositories
                                 Join Parent pf on f.FriendId=pf.Id
                                 Join ParentSitter sc on sc.ParentId=pf.Id
                                 Join Babysitter b on sc.BabysitterId=b.Id
+                                WHERE f.userId=@id
                          ";
+                       
+                        DbUtils.AddParameter(cmd, "@id", id);
 
                         var reader = cmd.ExecuteReader();
 
@@ -157,7 +197,9 @@ namespace SitterShare.Repositories
                 }
             }
 
+
         }
+
     }
 }
 

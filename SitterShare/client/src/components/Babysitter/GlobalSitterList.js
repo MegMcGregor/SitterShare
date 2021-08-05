@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GlobalSitterCard from './GlobalSitterCard';
-import { getAllBabysitters } from "../../modules/babysitterManager";
+import { getAllBabysitters } from "../../modules/babysitterManager"
 
 
 const GlobalSittersList = () => {

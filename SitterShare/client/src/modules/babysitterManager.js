@@ -2,6 +2,24 @@ import { getToken } from "./authManager";
 
 const baseUrl = '/api/babysitter'
 
+export const getCurrentUserB = () => {
+    return getToken().then((token) => {
+
+        return fetch(`${baseUrl}/{BabysitterFirebaseUid}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get user details.");
+            }
+        });
+    });
+};
+
 export const getAllBabysitters = () => {
     return getToken().then((token) => {
 

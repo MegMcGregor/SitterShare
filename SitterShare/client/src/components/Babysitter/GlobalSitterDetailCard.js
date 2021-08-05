@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getBabysitterById } from "../../modules/babysitterManager";
@@ -46,6 +46,7 @@ export const GlobalSitterDetailCard = () => {
                 <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
             </CardBody >
             <button onClick={handleAdd}>Add Sitter to My List</button>
+            <p> </p>
             <button onClick={() => history.goBack()}>back</button>
         </Card >
     )

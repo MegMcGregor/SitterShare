@@ -1,28 +1,30 @@
-// import React, { useState, useEffect } from "react"
-// import { AnimalContext } from "./AnimalProvider"
-// import { AnimalCard } from "./AnimalCard"
-// import "./Animal.css"
-
-// export const AnimalList = () => {
-//     // This state changes when `getAnimals()` is invoked below
-//     const { animals, getAnimals } = useContext(AnimalContext)
-
-//     //useEffect - reach out to the world for something
-//     useEffect(() => {
-//         console.log("AnimalList: useEffect - getAnimals")
-//         getAnimals()
-
-//     }, [])
+import React, { useEffect, useState } from "react";
+import GlobalParentCard from './GlobalParentCard';
+import { getAllParents } from "../../modules/parentManager";
 
 
-//     return (
-//         <div className="animals">
-//             {console.log("AnimalList: Render", animals)}
-//             {
-//                 animals.map(animal => {
-//                     return <AnimalCard key={animal.id} animal={animal} />
-//                 })
-//             }
-//         </div>
-//     )
-// }
+const GlobalParentsList = () => {
+    const [parents, setParents] = useState([]);
+
+    const getParents = () => {
+        getAllParents().then(parents => setParents(parents));
+    };
+
+    useEffect(() => {
+        getParents();
+    }, []);
+
+    return (
+        <div className="m-3">
+            <div className="container">
+                <div className="row m-3 justify-content-center">
+                    {parents.map((parent) => (
+                        <GlobalParentCard parent={parent} key={parent.id} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default GlobalParentsList;

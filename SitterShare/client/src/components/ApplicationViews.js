@@ -11,6 +11,10 @@ import LoginBabysitter from "./LoginBabysitter";
 import MyBabysitterDetail from "./ParentSitter/MyBabysitterDetails";
 import GlobalSittersList from "./Babysitter/GlobalSitterList";
 import GlobalSitterDetailCard from "./Babysitter/GlobalSitterDetailCard"
+import GlobalParentList from "./Parent/GlobalParentList"
+import GlobalParentDetailCard from "./Parent/GlobalParentDetailCard";
+import EditParentProfile from "./Parent/EditUserProfile";
+import BabysitterUserProfile from "./Babysitter/BabysitterUserProfile";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -49,11 +53,19 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <MyFriendList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/ParentProfile">
+                <Route path="/BabysitterProfile" exact>
+                    {isLoggedIn ? <BabysitterUserProfile /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/ParentProfile" exact>
                     {isLoggedIn ? <ParentUserProfile /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/SittersInMyNetwork">
+                <Route path="/ParentProfile/Edit/:id(\d+)" exact>
+                    {isLoggedIn ? <EditParentProfile /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/SittersInMyNetwork" exact>
                     {isLoggedIn ? <NetworkSitterList /> : <Redirect to="/login" />}
                 </Route>
 
@@ -63,6 +75,14 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/findsitters/details/:id(\d+)" exact>
                     {isLoggedIn ? <GlobalSitterDetailCard /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/findfriends" exact>
+                    {isLoggedIn ? <GlobalParentList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/findfriends/details/:id(\d+)" exact>
+                    {isLoggedIn ? <GlobalParentDetailCard /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

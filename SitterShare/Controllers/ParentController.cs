@@ -52,6 +52,17 @@ namespace SitterShare.Controllers
             return Ok(_parentRepository.GetAll());
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Parent parent)
+        {
+            if (id != parent.Id)
+            {
+                return BadRequest();
+            }
+            _parentRepository.Update(parent);
+            return NoContent();
+        }
+
 
         [HttpPost]
         public IActionResult Post(Parent parentUserProfile)
@@ -62,6 +73,13 @@ namespace SitterShare.Controllers
                 nameof(GetParentByFireBaseId),
                 new { parentFirebaseUid = parentUserProfile.ParentFirebaseUid },
                 parentUserProfile);
+        }
+
+        [HttpGet("ById/{id}")]
+        public IActionResult GetParentById(int id)
+        {
+            var parent = _parentRepository.GetParentById(id);
+            return Ok(parent);
         }
 
 

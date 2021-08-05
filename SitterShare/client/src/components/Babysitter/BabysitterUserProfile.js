@@ -3,26 +3,27 @@ import { Card, CardBody } from "reactstrap";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router";
-import { getCurrentUser } from "../../modules/parentManager";
+import { getCurrentUserB } from "../../modules/babysitterManager";
 
-const ParentUserProfile = () => {
+const BabysitterUserProfile = () => {
     const [user, setUser] = useState([]);
 
-    const GetMyParentUserProfile = () => {
-        getCurrentUser()
+    const GetMyBabysitterUserProfile = () => {
+        getCurrentUserB()
             .then(user => setUser(user))
     }
 
-    useEffect(() => {
-        GetMyParentUserProfile()
+    console.log(user)
 
+    useEffect(() => {
+        GetMyBabysitterUserProfile()
     }, []);
 
     return (
         <>
             <Card className="m-2 p-2 w-50 mx-auto">
                 < CardBody className="m-3" >
-                    <div className="profile-container">
+                    {/* <div className="profile-container">
                         <h2 className="text-center">{user.firstName + " " + user.lastName}</h2>
                         <p>{user.address} {user.city}, {user.State} {user.zipcode}</p>
                         <p>{user.numberOfKids} kids</p>
@@ -31,12 +32,12 @@ const ParentUserProfile = () => {
                         <button>
                             <Link to={`/parentprofile/edit/${user.id}`}>Edit My Profile</Link>
                         </button>
-                    </div>
+                    </div> */}
                 </CardBody>
             </Card>
         </>
     );
 };
 
-export default ParentUserProfile;
+export default BabysitterUserProfile;
 
