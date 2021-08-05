@@ -8,8 +8,6 @@ import NetworkSitterCard from "./NetworkSitterCard";
 const MySitterList = () => {
     const [babysitters, setBabysitters] = useState([]);
 
-    console.log(babysitters)
-
 
     const GetMySitterList = () => {
         getNetworkSitters()
