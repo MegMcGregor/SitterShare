@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getParentById } from "../../modules/parentManager";
@@ -31,17 +31,21 @@ export const GlobalParentDetailCard = () => {
     }, []);
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-            < CardBody className="m-3">
-                <p>
-                    <strong>Name: {parent.firstName} {parent.lastName}</strong>
-                </p>
-                <p><strong>City :</strong> {parent.city}</p>
-                <p><strong>State :</strong> {parent.state}</p>
-            </CardBody >
-            <button onClick={handleAdd}>Add Friend to My List</button>
-            <button onClick={() => history.goBack()}>back</button>
-        </Card >
+        <div>
+            <h2 className="text-center">Connect with {parent.firstName}</h2>
+            <Card className="m-2 p-2 w-50 mx-auto">
+                < CardBody className="m-3">
+                    <h5>
+                        <strong>{parent.firstName} {parent.lastName}</strong>
+                    </h5>
+                    <p><strong>City :</strong> {parent.city}</p>
+                    <p><strong>State :</strong> {parent.state}</p>
+                </CardBody >
+                <Button outline color="secondary" onClick={handleAdd}>Add Friend to My List</Button>
+                <p> </p>
+                <Button outline color="secondary" onClick={() => history.goBack()}>Back</Button>
+            </Card >
+        </div>
     )
 }
 

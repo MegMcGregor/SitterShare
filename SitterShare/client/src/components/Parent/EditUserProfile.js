@@ -25,20 +25,7 @@ const EditParentProfile = () => {
         evt.preventDefault();
         setIsLoading(true);
 
-        // const editedProfile = {
-        //     id: id,
-        //     ParentFirebaseUid: editedProfile.ParentFirebaseUid,
-        //     UserTypeId: editedProfile.UserTypeId,
-        //     FirstName: editedProfile.FirstName,
-        //     LastName: editedProfile.LastName,
-        //     Address: editedProfile.Address,
-        //     City: editedProfile.City,
-        //     State: editedProfile.State,
-        //     Zipcode: editedProfile.Zipcode,
-        //     Phone: editedProfile.Phone,
-        //     Email: editedProfile.Email,
-        //     NumberOfKids: editedProfile.NumberOfKids
-        // };
+
         updateParentProfile(profile)
             .then(() => {
                 history.push(`/parentprofile`);
@@ -91,8 +78,8 @@ const EditParentProfile = () => {
                         <Label htmlFor="phone">phone number</Label>
                         <Input id="phone" type="text" value={profile.phone} autoFocus onChange={handleInputChange} />
                     </FormGroup>
-                    <Button onClick={handleUpdate}>Submit</Button>
-                    <Button onClick={() => history.push(`/parentprofile`)}>Cancel</Button>
+                    <Button outline color="secondary" onClick={handleUpdate}>Submit</Button>
+                    <Button outline color="secondary" onClick={() => history.push(`/parentprofile`)}>Cancel</Button>
                 </Form>
             </CardBody>
         </Card>

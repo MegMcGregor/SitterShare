@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Card, CardBody } from "reactstrap";
 import GlobalSitterCard from './GlobalSitterCard';
 import { getAllBabysitters } from "../../modules/babysitterManager"
 
@@ -15,15 +16,14 @@ const GlobalSittersList = () => {
     }, []);
 
     return (
-        <div className="m-3">
-            <div className="container">
-                <div className="row m-3 justify-content-center">
-                    {sitters.map((sitter) => (
-                        <GlobalSitterCard sitter={sitter} key={sitter.id} />
-                    ))}
-                </div>
+        <>
+            <h2 className="text-center">Search for Babysitters</h2>
+            <div className="col m-2 p-2 justify-content-center">
+                {sitters.map((sitter) => (
+                    <GlobalSitterCard sitter={sitter} key={sitter.id} />
+                ))}
             </div>
-        </div>
+        </>
     );
 };
 

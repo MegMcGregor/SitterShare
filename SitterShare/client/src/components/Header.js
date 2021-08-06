@@ -57,14 +57,14 @@ export default function Header({ isLoggedIn }) {
                         {isLoggedIn && !userType ?
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                                    <NavLink tag={RRNavLink} to="/babysitterhome">Babysitter Home</NavLink>
                                 </NavItem>
                                 {/* <NavItem>
                                     <NavLink tag={RRNavLink} to="/">My Clients</NavLink>
                                 </NavItem> */}
-                                <NavItem>
+                                {/* <NavItem>
                                     <NavLink tag={RRNavLink} to="/BabysitterProfile">My Account</NavLink>
-                                </NavItem>
+                                </NavItem> */}
                                 {/* <NavItem>
                                     <NavLink tag={RRNavLink} to="/">Edit My Profile</NavLink>
                                 </NavItem> */}

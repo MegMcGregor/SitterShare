@@ -17,7 +17,7 @@ export default function LoginBabysitter() {
         loginBabysitter(email, password)
             .then(() => {
                 setUserType(false)
-                history.push("/")
+                history.push("/babysitterhome")
             })
             .catch(() => alert("Login Failed"));
     };
@@ -36,7 +36,7 @@ export default function LoginBabysitter() {
                             <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
                         </FormGroup>
                         <FormGroup>
-                            <Button>Login</Button>
+                            <Button outline color="secondary">Login</Button>
                         </FormGroup>
                         <em>
                             Not registered? <Link to="registerBabysitter">Register</Link>
