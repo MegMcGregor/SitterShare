@@ -17,7 +17,7 @@ export default function LoginBabysitter() {
         loginBabysitter(email, password)
             .then(() => {
                 setUserType(false)
-                history.push("/babysitterhome")
+                history.push("/")
             })
             .catch(() => alert("Login Failed"));
     };
