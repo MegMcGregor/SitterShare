@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, CardTitle, Button } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router";
 
@@ -11,9 +11,9 @@ export const GlobalParentCard = ({ parent }) => {
             <CardBody className="m-3">
                 <p><b>Name: </b>{parent.firstName} {parent.lastName}</p>
                 <div>
-                    <button >
+                    <Button outline color="secondary">
                         <Link to={`/findfriends/details/${parent.id}`}>view profile</Link>
-                    </button>
+                    </Button>
                 </div>
             </CardBody>
         </Card>

@@ -29,16 +29,13 @@ const MyFriendList = () => {
 
     return (
         <>
-            <Card>
-                < CardBody>
-                    <h2 className="text-center">My Friend List</h2>
-                    <div className="col m-2 p-2 justify-content-center">
-                        {friends.map((friend) => (
-                            <FriendCard friend={friend} key={friend.id} handleUnfriend={handleUnfriend} />
-                        ))}
-                    </div>
-                </CardBody>
-            </Card>
+            <h2 className="text-center">My Friends</h2>
+            <div className="col m-2 p-2 justify-content-center">
+                {friends.map((friend) => (
+                    <FriendCard friend={friend} key={friend.id} handleUnfriend={handleUnfriend} />
+                ))}
+            </div>
+
 
         </>
     );

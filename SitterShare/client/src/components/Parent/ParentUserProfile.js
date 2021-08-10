@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router";
@@ -20,6 +20,7 @@ const ParentUserProfile = () => {
 
     return (
         <>
+            <h2 className="text-center">My Profile</h2>
             <Card className="m-2 p-2 w-50 mx-auto">
                 < CardBody className="m-3" >
                     <div className="profile-container">
@@ -28,9 +29,9 @@ const ParentUserProfile = () => {
                         <p>{user.numberOfKids} kids</p>
                         <p>{user.phone}</p>
                         <p>{user.email}</p>
-                        <button>
+                        <Button outline color="secondary">
                             <Link to={`/parentprofile/edit/${user.id}`}>Edit My Profile</Link>
-                        </button>
+                        </Button>
                     </div>
                 </CardBody>
             </Card>

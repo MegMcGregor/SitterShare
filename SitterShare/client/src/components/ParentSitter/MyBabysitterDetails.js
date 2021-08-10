@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getUsersBabysitterById } from "../../modules/parentSitterManager";
@@ -51,7 +51,7 @@ export const MyBabysitterDetail = () => {
                 <p><strong>Reliable Transportation :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
                 <p><strong>Experience with infants :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
             </CardBody >
-            <button onClick={handleDelete}>Remove From My Babysitter List</button>
+            <Button outline color="secondary" onClick={handleDelete}>Remove From My Babysitter List</Button>
         </Card >
     )
 

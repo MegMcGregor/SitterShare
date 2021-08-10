@@ -14,7 +14,6 @@ export const GlobalSitterDetailCard = () => {
 
 
     const handleAdd = () => {
-        debugger
         let newParentSitterConnection = {
             parentId: 0,
             babysitterId: sitter.id,
@@ -32,23 +31,26 @@ export const GlobalSitterDetailCard = () => {
     }, []);
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-            < CardBody className="m-3">
-                <p>
-                    <strong>Name: {sitter.firstName} {sitter.lastName}</strong>
-                </p>
-                <p><strong>Bio :</strong> {sitter.bio}</p>
-                <p><strong>Age Group :</strong> {sitter.isMinor ? "18 & under" : "18 years +"}</p>
-                <p><strong>Zipcode :</strong> {sitter.zipcode}</p>
-                <p><strong>CPR Certified :</strong> {sitter.isCprCertified ? "yes" : "no"}</p>
-                <p><strong>Valid Driver's Lisence :</strong> {sitter.hasDriversLisence ? "yes" : "no"}</p>
-                <p><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
-                <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
-            </CardBody >
-            <button onClick={handleAdd}>Add Sitter to My List</button>
-            <p> </p>
-            <button onClick={() => history.goBack()}>back</button>
-        </Card >
+        <div>
+            <h2 className="text-center">Add {sitter.firstName} to My Sitter List</h2>
+            <Card className="m-2 p-2 w-50 mx-auto">
+                < CardBody className="m-3">
+                    <p>
+                        <strong>Name: {sitter.firstName} {sitter.lastName}</strong>
+                    </p>
+                    <p><strong>Bio :</strong> {sitter.bio}</p>
+                    <p><strong>Age Group :</strong> {sitter.isMinor ? "18 & under" : "18 years +"}</p>
+                    <p><strong>Zipcode :</strong> {sitter.zipcode}</p>
+                    <p><strong>CPR Certified :</strong> {sitter.isCprCertified ? "yes" : "no"}</p>
+                    <p><strong>Valid Driver's Lisence :</strong> {sitter.hasDriversLisence ? "yes" : "no"}</p>
+                    <p><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
+                    <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
+                </CardBody >
+                <Button outline color="secondary" onClick={handleAdd}>Add Sitter to My List</Button>
+                <p> </p>
+                <Button outline color="secondary" onClick={() => history.goBack()}>back</Button>
+            </Card >
+        </div>
     )
 }
 

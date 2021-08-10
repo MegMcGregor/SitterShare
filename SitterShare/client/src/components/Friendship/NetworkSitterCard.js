@@ -9,7 +9,6 @@ const NetworkSitterCard = ({ babysitter }) => {
         <Card >
             < CardBody >
                 <p>
-                    <h3>{babysitter.friend.firstName} recommends {babysitter.sitterConnection.babysitter.firstName}</h3>
                     <h4>{babysitter.sitterConnection.babysitter.firstName} {babysitter.sitterConnection.babysitter.lastName}</h4>
                     <p><strong>Bio :</strong> {babysitter.sitterConnection.babysitter.bio}</p>
                     <p><strong>Age Group :</strong> {babysitter.sitterConnection.babysitter.isMinor ? "18 & under" : "18 years +"}</p>
@@ -20,6 +19,7 @@ const NetworkSitterCard = ({ babysitter }) => {
                     <p><strong>Valid Driver's Lisence :</strong> {babysitter.sitterConnection.babysitter.hasDriversLisence ? "yes" : "no"}</p>
                     <p><strong>Reliable Transportation :</strong> {babysitter.sitterConnection.babysitter.hasTransportation ? "yes" : "no"}</p>
                     <p><strong>Experience with infants :</strong> {babysitter.sitterConnection.babysitter.hasTransportation ? "yes" : "no"}</p>
+                    <h5><em className="text-info">{babysitter.friend.firstName} recommends {babysitter.sitterConnection.babysitter.firstName}</em></h5>
 
                 </p>
             </CardBody >

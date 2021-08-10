@@ -35,7 +35,7 @@ export default function LoginParent() {
                             <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
                         </FormGroup>
                         <FormGroup>
-                            <Button>Login</Button>
+                            <Button outline color="secondary">Login</Button>
                         </FormGroup>
                         <em>
                             Not registered? <Link to="registerParent">Register</Link>

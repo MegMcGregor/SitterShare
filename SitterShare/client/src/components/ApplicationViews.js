@@ -15,6 +15,8 @@ import GlobalParentList from "./Parent/GlobalParentList"
 import GlobalParentDetailCard from "./Parent/GlobalParentDetailCard";
 import EditParentProfile from "./Parent/EditUserProfile";
 import BabysitterUserProfile from "./Babysitter/BabysitterUserProfile";
+import BabysitterHome from "./BabysitterHome";
+import Home from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -38,11 +40,15 @@ export default function ApplicationViews({ isLoggedIn }) {
                 </Route>
 
                 <Route path="/" exact>
-                    {isLoggedIn ? null : <Redirect to="/login" />}
+                    {isLoggedIn ? <Home /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/MySitterList" exact>
                     {isLoggedIn ? <MySitterList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/babysitterhome" exact>
+                    {isLoggedIn ? <BabysitterHome /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/MySitterList/details/:id(\d+)" exact>

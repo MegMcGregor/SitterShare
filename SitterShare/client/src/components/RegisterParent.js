@@ -86,7 +86,7 @@ export default function RegisterParent() {
                         <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Button>Register</Button>
+                        <Button outline color="secondary">Register</Button>
                     </FormGroup>
                 </Form>
             </CardBody>
