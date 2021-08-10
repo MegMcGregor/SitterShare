@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { userTypeContext } from "../modules/UserTypeProvider";
 import { NavLink as RRNavLink } from "react-router-dom";
+import "./Header.css"
 import {
     Collapse,
     Navbar,
@@ -21,7 +22,7 @@ export default function Header({ isLoggedIn }) {
     return (
         <div>
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">SitterShare</NavbarBrand>
+                <NavbarBrand className="logo" tag={RRNavLink} to="/">SitterShare</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

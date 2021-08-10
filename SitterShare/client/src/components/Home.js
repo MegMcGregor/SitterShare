@@ -9,6 +9,6 @@ export default function Welcome() {
             top: "50%",
             marginTop: "-0.5rem",
             textAlign: "center",
-        }}><h4><em className="text-info">Welcome!</em></h4></span>
+        }}><h4 class="text-info">Welcome!</h4></span>
     );
 }

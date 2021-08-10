@@ -14,7 +14,6 @@ export const GlobalSitterDetailCard = () => {
 
 
     const handleAdd = () => {
-        debugger
         let newParentSitterConnection = {
             parentId: 0,
             babysitterId: sitter.id,
