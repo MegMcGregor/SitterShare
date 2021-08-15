@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 .logo {
     font-family: 'ABeeZee', sans-serif;
     margin-left: 1em !important;
     font-size: 2.5em;
     font-weight: bold;
+    color: #FF5371;
 }
 
-.Navbar {
-    background-color: blue !important;
+.logo:hover {
+    color:#397DC9
+}
+
+.nav-link {
+    color: #666666;
+    font-family: 'Poppins';
+}
+
+.nav-link:hover {
+    color: #397DC9
 }
