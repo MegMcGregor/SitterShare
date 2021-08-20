@@ -1,6 +1,6 @@
 import React from "react";
 import { Media } from "reactstrap";
-import img from "./faces.jpg"
+import img from "./faces.png"
 
 export const Welcome = () => {
     const imgStyle = {
