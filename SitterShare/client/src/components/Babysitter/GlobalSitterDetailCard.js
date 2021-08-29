@@ -1,9 +1,10 @@
 import React from "react";
-import { Card, CardBody, Button } from "reactstrap";
+import { Card, CardBody, Button, CardImg } from "reactstrap";
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { getBabysitterById } from "../../modules/babysitterManager";
 import { addNewSitterConnection } from "../../modules/parentSitterManager"
+import img from "../teddyimage.png"
 import { Link } from "react-router-dom";
 
 export const GlobalSitterDetailCard = () => {
@@ -33,11 +34,12 @@ export const GlobalSitterDetailCard = () => {
     return (
         <div>
             <h2 className="text-center">Add {sitter.firstName} to My Sitter List</h2>
-            <Card className="m-2 p-2 w-50 mx-auto">
+            <Card className="m-2 w-50 mx-auto">
+                <CardImg className="m-2 w-50 mx-auto" src={img}></CardImg>
                 < CardBody className="m-3">
-                    <p>
-                        <strong>Name: {sitter.firstName} {sitter.lastName}</strong>
-                    </p>
+                    <h5>
+                        <strong>{sitter.firstName} {sitter.lastName}</strong>
+                    </h5>
                     <p><strong>Bio :</strong> {sitter.bio}</p>
                     <p><strong>Age Group :</strong> {sitter.isMinor ? "18 & under" : "18 years +"}</p>
                     <p><strong>Zipcode :</strong> {sitter.zipcode}</p>
@@ -45,10 +47,9 @@ export const GlobalSitterDetailCard = () => {
                     <p><strong>Valid Driver's Lisence :</strong> {sitter.hasDriversLisence ? "yes" : "no"}</p>
                     <p><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
                     <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
+                    <Button className="m-2" outline color="secondary" onClick={handleAdd}>Add Sitter to My List</Button>
+                    <Button className="m-2" outline color="secondary" onClick={() => history.goBack()}>Back</Button>
                 </CardBody >
-                <Button outline color="secondary" onClick={handleAdd}>Add Sitter to My List</Button>
-                <p> </p>
-                <Button outline color="secondary" onClick={() => history.goBack()}>back</Button>
             </Card >
         </div>
     )
