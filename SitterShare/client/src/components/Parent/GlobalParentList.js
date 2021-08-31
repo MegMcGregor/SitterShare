@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardDeck, CardBody, Container, Row, Col } from "reactstrap";
+import { Card, CardDeck, CardGroup, CardBody, Container, Row, Col } from "reactstrap";
 import GlobalParentCard from './GlobalParentCard';
 import { getAllParents } from "../../modules/parentManager";
 import "./GlobalParentList.css"
@@ -19,7 +19,7 @@ const GlobalParentsList = () => {
     return (
         <>
             <h2 className="text-center">Search for Friends</h2>
-            <CardDeck className="justify-content-center">
+            <CardDeck className="d-flex flex-wrap w-75 mx-auto">
                 {parents.map((parent) => (
                     <GlobalParentCard parent={parent} key={parent.id} />
                 ))}

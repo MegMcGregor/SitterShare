@@ -8,7 +8,7 @@ export const GlobalParentCard = ({ parent }) => {
     ///add a handle add sitter here and implement onClick in the button
 
     return (
-        <Card className="m-2 w-25 mx-auto">
+        <Card className="m-4 w-25">
             <CardImg top width="100%" src={img}></CardImg>
             <CardTitle className="text-center" tag="h4">{parent.firstName} {parent.lastName}</CardTitle>
             <Button className="m-3" outline color="secondary">
