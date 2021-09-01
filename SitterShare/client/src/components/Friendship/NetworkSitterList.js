@@ -21,7 +21,7 @@ const MySitterList = () => {
     return (
         <>
             <h2 className="text-center">Sitters in My Network</h2>
-            <div className="col m-2 p-2 justify-content-center">
+            <div className="d-flex flex-wrap w-75 mx-auto">
                 {babysitters.map((babysitter) => (
                     <NetworkSitterCard babysitter={babysitter} key={babysitter.sitterConnection.babysitter.id} />
                 ))}

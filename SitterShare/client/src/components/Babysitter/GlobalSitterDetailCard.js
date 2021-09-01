@@ -34,7 +34,7 @@ export const GlobalSitterDetailCard = () => {
     return (
         <div>
             <h2 className="text-center">Add {sitter.firstName} to My Sitter List</h2>
-            <Card className="m-2 w-50 mx-auto">
+            <Card className="m-2 w-50 border-0 shadow-sm mx-auto">
                 <CardImg className="m-2 w-50 mx-auto" src={img}></CardImg>
                 < CardBody className="m-3">
                     <h5>

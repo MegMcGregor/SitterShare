@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const BabysitterCard = ({ babysitter }) => {
 
     return (
-        <Card className="m-2 p-2 w-25 mx-auto">
+        <Card className="m-4 w-25">
             <CardImg top width="100%" src={img}></CardImg>
             < CardBody>
                 <CardTitle tag="h5">{babysitter.babysitter.firstName} {babysitter.babysitter.lastName}</CardTitle>

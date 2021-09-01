@@ -18,7 +18,7 @@ const GlobalSittersList = () => {
     return (
         <>
             <h2 className="text-center">Search for Babysitters</h2>
-            <CardDeck className="justify-content-center">
+            <CardDeck className="d-flex flex-wrap w-75 mx-auto">
                 {sitters.map((sitter) => (
                     <GlobalSitterCard sitter={sitter} key={sitter.id} />
                 ))}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, CardDeck } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getCurrentUsersBabysitters } from "../../modules/parentSitterManager";
@@ -21,11 +21,11 @@ const MySitterList = () => {
     return (
         <>
             <h2 className="text-center">My Babysitters</h2>
-            <div className="col m-2 p-2 justify-content-center">
+            <CardDeck className="d-flex flex-wrap w-75 mx-auto">
                 {babysitters.map((babysitter) => (
                     <BabysitterCard babysitter={babysitter} key={babysitter.babysitterId} />
                 ))}
-            </div>
+            </CardDeck>
         </>
     );
 };

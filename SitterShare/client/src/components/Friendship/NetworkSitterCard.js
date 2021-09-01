@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NetworkSitterCard = ({ babysitter }) => {
 
     return (
-        <Card >
+        <Card className="m-4 w-50">
             < CardBody >
                 <p>
                     <h4>{babysitter.sitterConnection.babysitter.firstName} {babysitter.sitterConnection.babysitter.lastName}</h4>

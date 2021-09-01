@@ -10,7 +10,7 @@ const FriendCard = ({ handleUnfriend, friend }) => {
 
     console.log(friend)
     return (
-        <Card className="m-2 p-2 w-25 mx-auto">
+        <Card className="m-4 w-25">
             <CardImg className="m-2 mx-auto" src={img}></CardImg>
             < CardBody className="m-3" >
                 <h5>{friend.friend.firstName} {friend.friend.lastName}</h5>

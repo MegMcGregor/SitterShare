@@ -8,15 +8,15 @@ export const GlobalSitterCard = ({ sitter }) => {
     ///add a handle add sitter here and implement onClick in the button
 
     return (
-        <Card className="m-2 w-25 mx-auto">
+        <Card className="m-4 w-25 card border-0 shadow-sm">
             <CardImg top width="100%" src={img} alt="usericon" />
             <CardBody>
                 <CardTitle tag="h5">{sitter.firstName} {sitter.lastName}</CardTitle>
                 <CardText>{sitter.bio}</CardText>
-                <Button outline color="secondary">
-                    <Link to={`/findsitters/details/${sitter.id}`} style={{ textDecoration: 'none', color: 'black' }}>view details</Link>
-                </Button>
             </CardBody >
+            <Button className="border-0 m-3" style={{ backgroundColor: "#22B499", opacity: 0.8 }}>
+                <Link to={`/findsitters/details/${sitter.id}`} style={{ textDecoration: 'none', color: 'white' }}>view profile</Link>
+            </Button>
         </Card >
     );
 }

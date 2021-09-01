@@ -4,13 +4,17 @@
 .logo {
     font-family: 'ABeeZee', sans-serif;
     margin-left: 1em !important;
-    font-size: 2.5em;
+    font-size: 3.25em;
     font-weight: bold;
     color: #FF5371;
 }
 
 .logo:hover {
-    color:#397DC9
+    color: #FF5371;
+}
+
+.nav-link:hover {
+    color:#22B499 !important;
 }
 
 .nav-link {
@@ -20,4 +24,9 @@
 
 .nav-link:hover {
     color: #397DC9
+}
+
+.top-header {
+    background-color: #397DC9;
+    height: 2em;
 }

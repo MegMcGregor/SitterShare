@@ -8,12 +8,14 @@ export const GlobalParentCard = ({ parent }) => {
     ///add a handle add sitter here and implement onClick in the button
 
     return (
-        <Card className="m-4 w-25">
+        <Card className="m-4 w-25 card border-0 shadow-sm">
             <CardImg top width="100%" src={img}></CardImg>
-            <CardTitle className="text-center" tag="h4">{parent.firstName} {parent.lastName}</CardTitle>
-            <Button className="m-3" outline color="secondary">
-                <Link to={`/findfriends/details/${parent.id}`} style={{ textDecoration: 'none', color: 'black' }}>view profile</Link>
-            </Button>
+            <CardBody>
+                <CardTitle className="text-center" tag="h4">{parent.firstName} {parent.lastName}</CardTitle>
+                <Button className="border-0 m-3" style={{ backgroundColor: "#22B499", opacity: 0.8 }}>
+                    <Link to={`/findfriends/details/${parent.id}`} style={{ textDecoration: 'none', color: 'white' }}>view profile</Link>
+                </Button>
+            </CardBody>
         </Card >
     );
 }

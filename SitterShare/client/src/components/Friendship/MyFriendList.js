@@ -30,7 +30,7 @@ const MyFriendList = () => {
     return (
         <>
             <h2 className="text-center">My Friends</h2>
-            <div className="col m-2 p-2 justify-content-center">
+            <div className="d-flex flex-wrap w-75 mx-auto">
                 {friends.map((friend) => (
                     <FriendCard friend={friend} key={friend.id} handleUnfriend={handleUnfriend} />
                 ))}
