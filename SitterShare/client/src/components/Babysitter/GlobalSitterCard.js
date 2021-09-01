@@ -14,7 +14,7 @@ export const GlobalSitterCard = ({ sitter }) => {
                 <CardTitle tag="h5">{sitter.firstName} {sitter.lastName}</CardTitle>
                 <CardText>{sitter.bio}</CardText>
             </CardBody >
-            <Button className="border-0 m-3" style={{ backgroundColor: "#22B499", opacity: 0.8 }}>
+            <Button className="border-0 m-3 w-75 mx-auto" style={{ backgroundColor: "#22B499", opacity: 0.8 }}>
                 <Link to={`/findsitters/details/${sitter.id}`} style={{ textDecoration: 'none', color: 'white' }}>view profile</Link>
             </Button>
         </Card >
