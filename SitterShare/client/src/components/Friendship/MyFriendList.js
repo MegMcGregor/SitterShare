@@ -25,8 +25,6 @@ const MyFriendList = () => {
         GetMyFriendList()
     }, []);
 
-    { console.log(friends) }
-
     return (
         <>
             <h2 className="text-center">My Friends</h2>

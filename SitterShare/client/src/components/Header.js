@@ -25,7 +25,7 @@ export default function Header({ isLoggedIn }) {
             <Navbar style={{ backgroundColor: '#FFFF' }} expand="md">
                 <NavbarBrand className="logo" tag={RRNavLink} to="/">SitterShare</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
+                <Collapse className="nav-items" isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         {userType && isLoggedIn ?
                             <>

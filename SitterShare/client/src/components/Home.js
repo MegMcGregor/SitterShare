@@ -1,25 +1,35 @@
 import React from "react";
-import { Media } from "reactstrap";
+import { Media, Card, CardBody } from "reactstrap";
 import img from "./faces.png"
 
 export const Welcome = () => {
+
     const imgStyle = {
-        maxHeight: 400,
-        maxWidth: 400
+        maxWidth: 500
     }
 
     const homeContainer = {
         marginLeft: 0,
         marginRight: 0,
-        top: "50%",
         marginTop: "4rem",
         textAlign: "center"
     }
 
+    const fontFamily = {
+        fontFamily: 'Poppins',
+        fontWeight: "bold",
+        color: "white",
+        letterSpacing: 4
+    }
+
     return (
-        <div style={homeContainer} className="home">
-            <Media className="faces-logo" style={imgStyle} src={img}></Media>
-            <h4>Welcome!</h4>
+        <div style={homeContainer}>
+            <Card className="mx-4 w-50 card border-0 shadow-sm mx-auto">
+                <Media className="faces-logo" className="mx-auto" style={imgStyle} src={img}></Media>
+                <CardBody className="mt-6" style={{ backgroundColor: "#50ACE4" }}>
+                    <h3 style={fontFamily} className="p-4">Welcome!</h3>
+                </CardBody>
+            </Card >
         </div>
     );
 }

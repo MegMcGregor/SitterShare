@@ -7,14 +7,21 @@ import { useHistory } from "react-router";
 export const GlobalParentCard = ({ parent }) => {
     ///add a handle add sitter here and implement onClick in the button
 
+    const fontFamily = {
+        fontFamily: 'Poppins',
+        fontWeight: "bold",
+        letterSpacing: 2,
+        color: "#666666"
+    }
+
     return (
         <Card className="m-4 w-25 card border-0 shadow-sm">
             <CardImg top width="100%" src={img}></CardImg>
             <CardBody>
-                <CardTitle className="text-center" tag="h4">{parent.firstName} {parent.lastName}</CardTitle>
+                <CardTitle className="text-center" tag="h4" style={fontFamily}>{parent.firstName} {parent.lastName}</CardTitle>
             </CardBody>
-            <Button className="border-0 m-3 w-75 mx-auto" style={{ backgroundColor: "#22B499", opacity: 0.8 }}>
-                <Link to={`/findfriends/details/${parent.id}`} style={{ textDecoration: 'none', color: 'white' }}>view profile</Link>
+            <Button className="border-0 m-3 w-75 mx-auto" style={{ backgroundColor: "#22B499" }}>
+                <Link to={`/findfriends/details/${parent.id}`} style={{ fontFamily: 'Poppins', letterSpacing: 1, textDecoration: 'none', color: 'white' }}>view profile</Link>
             </Button>
         </Card >
     );
