@@ -3,10 +3,10 @@
 
 .logo {
     font-family: 'ABeeZee', sans-serif;
-    margin-left: 1em !important;
-    font-size: 3.5em;
+    font-size: 3.2em;
     font-weight: bold;
     color: #FF5371;
+    margin-left: .5em !important;
 }
 
 .logo:hover {
@@ -27,5 +27,13 @@
 
 .top-header {
     background-color: #327cd1;
-    height: 2em
+    height: 2.2em
+}
+
+.header-image {
+    height: auto;
+    width: auto;
+    max-height: 8em;
+    max-width: 8em;
+    margin-left: 2em !important;
 }

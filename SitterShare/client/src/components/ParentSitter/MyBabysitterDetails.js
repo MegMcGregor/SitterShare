@@ -12,6 +12,27 @@ export const MyBabysitterDetail = () => {
     const [babysitterDetails, setBabysitterDetails] = useState({})
     const history = useHistory();
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666'
+    }
+
+    const fontFamily = {
+        fontFamily: 'Poppins',
+        fontWeight: "bold",
+        letterSpacing: 2,
+        color: "#666666"
+    }
+
+    const subTextFontFamily = {
+        fontFamily: 'Poppins',
+        letterSpacing: 1,
+        color: "#666666"
+    }
+
+
     const getMyBabysitterDetails = () => {
         getUsersBabysitterById(id)
             .then(res => {
@@ -36,23 +57,26 @@ export const MyBabysitterDetail = () => {
 
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-            < CardBody className="m-3" >
-                <p>
-                    <strong>Name: {babysitter.firstName} {babysitter.lastName}</strong>
-                </p>
-                <p><strong>Bio :</strong> {babysitter.bio}</p>
-                <p><strong>Age Group :</strong> {babysitter.isMinor ? "18 & under" : "18 years +"}</p>
-                <p><strong>Phone :</strong> {babysitter.phone}</p>
-                <p><strong>Email :</strong> {babysitter.email}</p>
-                <p><strong>Zipcode :</strong> {babysitter.zipcode}</p>
-                <p><strong>CPR Certified :</strong> {babysitter.isCprCertified ? "yes" : "no"}</p>
-                <p><strong>Valid Driver's Lisence :</strong> {babysitter.hasDriversLisence ? "yes" : "no"}</p>
-                <p><strong>Reliable Transportation :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
-                <p><strong>Experience with infants :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
-            </CardBody >
-            <Button outline color="secondary" onClick={handleDelete}>Remove From My Babysitter List</Button>
-        </Card >
+        <>
+            <h2 style={titleFontFamily} className="text-center mb-4">{babysitter.firstName}'s Contact Info</h2>
+            <Card className="m-2 border-0 shadow-sm mx-auto" style={{ width: "40%" }}>
+                <CardBody className="mx-auto mb-4 mt-4" style={{ width: "90%" }}>
+                    <h4 className="mb-4 text-center" style={fontFamily}>
+                        <strong>{babysitter.firstName} {babysitter.lastName}</strong>
+                    </h4>
+                    <p style={subTextFontFamily}><strong>Bio :</strong> {babysitter.bio}</p>
+                    <p style={subTextFontFamily}><strong>Age Group :</strong> {babysitter.isMinor ? "18 & under" : "18 years +"}</p>
+                    <p style={subTextFontFamily}><strong>Phone :</strong> {babysitter.phone}</p>
+                    <p style={subTextFontFamily}><strong>Email :</strong> {babysitter.email}</p>
+                    <p style={subTextFontFamily}><strong>Zipcode :</strong> {babysitter.zipcode}</p>
+                    <p style={subTextFontFamily}><strong>CPR Certified :</strong> {babysitter.isCprCertified ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Valid Driver's Lisence :</strong> {babysitter.hasDriversLisence ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Reliable Transportation :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Experience with infants :</strong> {babysitter.hasTransportation ? "yes" : "no"}</p>
+                    <Button style={{ width: "50%", backgroundColor: "#22B499", fontFamily: 'Poppins', border: 0, letterSpacing: 1, textDecoration: 'none', color: 'white' }} onClick={handleDelete}>remove from my sitter List</Button>
+                </CardBody >
+            </Card >
+        </>
     )
 
 }

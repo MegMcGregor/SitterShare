@@ -9,9 +9,12 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    Media
 } from 'reactstrap';
 import { logout } from "../modules/authManager";
+import img from "./puzzlelogo.png"
+
 
 export default function Header({ isLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +26,7 @@ export default function Header({ isLoggedIn }) {
         <div>
             <div className="top-header"></div>
             <Navbar style={{ backgroundColor: '#FFFF' }} expand="md">
+                <Media className="header-image" src={img}></Media>
                 <NavbarBrand className="logo" tag={RRNavLink} to="/">SitterShare</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse className="nav-items" isOpen={isOpen} navbar>

@@ -13,6 +13,25 @@ export const GlobalSitterDetailCard = () => {
     const [sitter, setSitter] = useState({});
     const history = useHistory();
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666',
+    }
+
+    const fontFamily = {
+        fontFamily: 'Poppins',
+        fontWeight: "bold",
+        letterSpacing: 2,
+        color: "#666666"
+    }
+
+    const subTextFontFamily = {
+        fontFamily: 'Poppins',
+        letterSpacing: 1,
+        color: "#666666"
+    }
 
     const handleAdd = () => {
         let newParentSitterConnection = {
@@ -32,26 +51,28 @@ export const GlobalSitterDetailCard = () => {
     }, []);
 
     return (
-        <div>
-            <h2 className="text-center">Add {sitter.firstName} to My Sitter List</h2>
-            <Card className="m-2 w-50 border-0 shadow-sm mx-auto">
+        <>
+            <h2 style={titleFontFamily} className="text-center">Add {sitter.firstName} to My Sitter List</h2>
+            <Card className="m-2 border-0 shadow-sm mx-auto" style={{ width: "40%" }}>
                 <CardImg className="m-2 w-50 mx-auto" src={img}></CardImg>
-                < CardBody className="m-3">
-                    <h5>
+                < CardBody className="mx-auto mb-4" style={{ width: "90%" }}>
+                    <h4 style={fontFamily}>
                         <strong>{sitter.firstName} {sitter.lastName}</strong>
-                    </h5>
-                    <p><strong>Bio :</strong> {sitter.bio}</p>
-                    <p><strong>Age Group :</strong> {sitter.isMinor ? "18 & under" : "18 years +"}</p>
-                    <p><strong>Zipcode :</strong> {sitter.zipcode}</p>
-                    <p><strong>CPR Certified :</strong> {sitter.isCprCertified ? "yes" : "no"}</p>
-                    <p><strong>Valid Driver's Lisence :</strong> {sitter.hasDriversLisence ? "yes" : "no"}</p>
-                    <p><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
-                    <p><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
-                    <Button className="m-2" outline color="secondary" onClick={handleAdd}>Add Sitter to My List</Button>
-                    <Button className="m-2" outline color="secondary" onClick={() => history.goBack()}>Back</Button>
+                    </h4>
+                    <p style={subTextFontFamily}><strong>Bio :</strong> {sitter.bio}</p>
+                    <p style={subTextFontFamily}><strong>Age Group :</strong> {sitter.isMinor ? "18 & under" : "18 years +"}</p>
+                    <p style={subTextFontFamily}><strong>Zipcode :</strong> {sitter.zipcode}</p>
+                    <p style={subTextFontFamily}><strong>CPR Certified :</strong> {sitter.isCprCertified ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Valid Driver's Lisence :</strong> {sitter.hasDriversLisence ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Reliable Transportation :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
+                    <p style={subTextFontFamily}><strong>Experience with infants :</strong> {sitter.hasTransportation ? "yes" : "no"}</p>
+                    <Button style={{ width: "50%", backgroundColor: "#22B499", fontFamily: 'Poppins', border: 0, letterSpacing: 1, textDecoration: 'none', color: 'white' }} onClick={handleAdd}>add sitter to my list</Button>
                 </CardBody >
             </Card >
-        </div>
+            {/* <div className="back-button">
+                <Button className="m-2" outline color="secondary" onClick={() => history.goBack()}>go back</Button>
+            </div> */}
+        </>
     )
 }
 

@@ -28,6 +28,12 @@ export const GlobalParentDetailCard = () => {
         color: "#666666"
     }
 
+    const subTextFontFamily = {
+        fontFamily: 'Poppins',
+        letterSpacing: 1,
+        color: "#666666"
+    }
+
     const handleAdd = () => {
         let newFriendConnection = {
             userId: 0,

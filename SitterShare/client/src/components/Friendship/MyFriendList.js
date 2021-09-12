@@ -9,6 +9,13 @@ import FriendCard from "./FriendCard";
 const MyFriendList = () => {
     const [friends, setFriends] = useState([]);
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666'
+    }
+
     const GetMyFriendList = () => {
         getCurrentUsersFriends()
             .then(friends => setFriends(friends))
@@ -27,7 +34,7 @@ const MyFriendList = () => {
 
     return (
         <>
-            <h2 className="text-center">My Friends</h2>
+            <h2 style={titleFontFamily} className="text-center">My Friends</h2>
             <div className="d-flex flex-wrap w-75 mx-auto">
                 {friends.map((friend) => (
                     <FriendCard friend={friend} key={friend.id} handleUnfriend={handleUnfriend} />

@@ -15,9 +15,16 @@ const GlobalSittersList = () => {
         getSitters();
     }, []);
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666'
+    }
+
     return (
         <>
-            <h2 className="text-center">Search for Babysitters</h2>
+            <h2 style={titleFontFamily} className="text-center">Search for Babysitters</h2>
             <CardDeck className="d-flex flex-wrap w-75 mx-auto">
                 {sitters.map((sitter) => (
                     <GlobalSitterCard sitter={sitter} key={sitter.id} />

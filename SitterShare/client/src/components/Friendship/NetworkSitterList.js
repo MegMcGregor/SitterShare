@@ -8,6 +8,12 @@ import NetworkSitterCard from "./NetworkSitterCard";
 const MySitterList = () => {
     const [babysitters, setBabysitters] = useState([]);
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666'
+    }
 
     const GetMySitterList = () => {
         getNetworkSitters()
@@ -20,8 +26,8 @@ const MySitterList = () => {
 
     return (
         <>
-            <h2 className="text-center">Sitters in My Network</h2>
-            <div className="d-flex flex-wrap w-75 mx-auto">
+            <h2 style={titleFontFamily} className="text-center">Babysitters in My Network</h2>
+            <div className="mx-auto">
                 {babysitters.map((babysitter) => (
                     <NetworkSitterCard babysitter={babysitter} key={babysitter.sitterConnection.babysitter.id} />
                 ))}
