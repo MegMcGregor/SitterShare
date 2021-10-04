@@ -24,7 +24,6 @@ export default function Header({ isLoggedIn }) {
 
     return (
         <div>
-            <div className="top-header"></div>
             <Navbar style={{ backgroundColor: '#FFFF' }} expand="md">
                 <Media className="header-image" src={img}></Media>
                 <NavbarBrand className="logo" tag={RRNavLink} to="/">SitterShare</NavbarBrand>
