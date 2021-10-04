@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardDeck, CardBody, Row } from "reactstrap";
 import GlobalSitterCard from './GlobalSitterCard';
 import { getAllBabysitters } from "../../modules/babysitterManager"
 
@@ -15,14 +15,21 @@ const GlobalSittersList = () => {
         getSitters();
     }, []);
 
+    const titleFontFamily = {
+        fontFamily: 'ABeeZee',
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        color: '#666666'
+    }
+
     return (
         <>
-            <h2 className="text-center">Search for Babysitters</h2>
-            <div className="col m-2 p-2 justify-content-center">
+            <h2 style={titleFontFamily} className="text-center">Search for Babysitters</h2>
+            <CardDeck className="d-flex flex-wrap w-75 mx-auto">
                 {sitters.map((sitter) => (
                     <GlobalSitterCard sitter={sitter} key={sitter.id} />
                 ))}
-            </div>
+            </CardDeck>
         </>
     );
 };

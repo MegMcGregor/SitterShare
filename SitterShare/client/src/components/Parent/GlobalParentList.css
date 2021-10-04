@@ -1,0 +1,10 @@
+h2 {
+    margin-top: 1em;
+}
+
+.back-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    width: 25%;
+}
